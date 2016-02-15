@@ -4,7 +4,7 @@
 \alias{full.xgb}
 \title{DUN xgboost model}
 \usage{
-full.xgb(train, test)
+full.xgb()
 }
 \arguments{
 \item{train}{full training set.}

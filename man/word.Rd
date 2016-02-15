@@ -4,7 +4,7 @@
 \alias{word}
 \title{Word frequency}
 \usage{
-word(a, train, test)
+word(a)
 }
 \arguments{
 \item{a}{String of a single word.}

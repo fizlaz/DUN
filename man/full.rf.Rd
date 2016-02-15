@@ -4,7 +4,7 @@
 \alias{full.rf}
 \title{DUN random forest model}
 \usage{
-full.rf(train, test)
+full.rf()
 }
 \arguments{
 \item{train}{full training set.}
