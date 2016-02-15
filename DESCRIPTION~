@@ -8,7 +8,7 @@ Description: To reproduce our current submissions please run full.rf and full.xg
 	.csv format.
 Depends:
     R (>= 3.2.1)
-License: see LICENCE
+License: GPL (>= 3)
 LazyData: true
 Type: Package
 URL: https://github.com/fizlaz/DUN
