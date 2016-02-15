@@ -14,4 +14,4 @@ Type: Package
 URL: https://github.com/fizlaz/DUN
 RoxygenNote: 5.0.1
 LazyData: true
-Imports: randomForest, xgboost
+Imports: randomForest, xgboost, class, maboost, caret, base

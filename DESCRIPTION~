@@ -8,10 +8,10 @@ Description: To reproduce our current submissions please run full.rf and full.xg
 	.csv format.
 Depends:
     R (>= 3.2.1)
-License: GPL (>= 3)
+License: see LICENSE
 LazyData: true
 Type: Package
 URL: https://github.com/fizlaz/DUN
 RoxygenNote: 5.0.1
 LazyData: true
-Imports: randomForest, xgboost
+Imports: randomForest, xgboost, class, maboost, caret
