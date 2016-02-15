@@ -12,5 +12,5 @@ LazyData: true
 Type: Package
 URL: 
 RoxygenNote: 5.0.1
-Imports: randomForest
+Imports: randomForest, xgboost
 LazyData: true

@@ -3,8 +3,9 @@ Title: Team DUN Kaggle milestone (one line, title case)
 Version: 0.0.0.9000
 Author: Domagoj Fizulic <d.fizulic@gmail.com>, Uwe Hönig, Niti Mishra
 Maintainer: Domagoj Fizulic <d.fizulic@gmail.com>
-Description: In-class Kaggle interim evaluation. Data manipulation and
-    classification methods. (one paragraph).
+Description: To reproduce our current submissions please run full.rf and full.xgb.
+	These functions will automatically return and save submissions in the appropriate
+	.csv format.
 Depends:
     R (>= 3.2.1)
 License: see LICENCE
