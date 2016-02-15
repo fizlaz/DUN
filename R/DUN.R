@@ -8,6 +8,8 @@
 #' @param a String of a single word.
 #' @return A list with following elements: freqdiff, diff, freqtrain, freqtest
 word <- function(a){
+  titles <- substr(train[,2],32,nchar(train[,2])-1)
+  titlestest <- substr(test[,2],32,nchar(test[,2])-1)
   f <- table(train$popularity)/length(train$popularity)
   t <- table(train$popularity[grep(a,titles)])/length(grep(a,titles))-f
   frdif <- (t[3]-t[2])*100
@@ -82,6 +84,5 @@ full.xgb <- function(){
   return(submission)
 }
 
-#' packages 
+#' packages
 #' @import xgboost randomForest
-
