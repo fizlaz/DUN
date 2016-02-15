@@ -21,22 +21,6 @@ word <- function(a,train,test){
   return(list(freqdiff=round(t,5),diff=frdif,freqtrain=l,freqtest=l1))
 }
 
-#' News popularity training data.
-#'
-#' A dataset containing the attributes of 30,000 articles.
-#'
-#' @format A data frame with 30000 rows and 62 variables
-#' @source \url{https://inclass.kaggle.com/c/predicting-online-news-popularity/data}
-"train"
-
-#' News popularity test data.
-#'
-#' A dataset containing the attributes of 9,644 articles.
-#'
-#' @format A data frame with 9644 rows and 61 variables
-#' @source \url{https://inclass.kaggle.com/c/predicting-online-news-popularity/data}
-"test"
-
 # ----------------------------------------------------------------------
 # DUN current RF model
 # ----------------------------------------------------------------------
