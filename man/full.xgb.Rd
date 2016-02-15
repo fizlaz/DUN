@@ -4,7 +4,12 @@
 \alias{full.xgb}
 \title{DUN xgboost model}
 \usage{
-full.xgb()
+full.xgb(train, test)
+}
+\arguments{
+\item{train}{full training set.}
+
+\item{test}{full test set.}
 }
 \value{
 A data frame with id and popularity columns
