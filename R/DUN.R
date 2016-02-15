@@ -6,10 +6,11 @@
 #' Gives word frequencies etc
 #'
 #' @param a String of a single word.
-#' @param train full training set.
-#' @param test full test set.
+#' @param train Full training set.
+#' @param test Full test set.
 #' @return A list with following elements: freqdiff, diff, freqtrain, freqtest
-word <- function(a){
+#' @export
+word <- function(a,train,test){
   titles <- substr(train[,2],32,nchar(train[,2])-1)
   titlestest <- substr(test[,2],32,nchar(test[,2])-1)
   f <- table(train$popularity)/length(train$popularity)
@@ -43,10 +44,11 @@ word <- function(a){
 #'
 #' Creates team DUN submission file
 #'
-#' @param train full training set.
-#' @param test full test set.
+#' @param train Full training set.
+#' @param test Full test set.
 #' @return A data frame with id and popularity columns
-full.rf <- function(){
+#' @export
+full.rf <- function(train,test){
 
   rf <- randomForest::randomForest(train[,-c(1,2,62)], as.factor(train$popularity), ntree=1000,
                      importance=TRUE)
@@ -64,10 +66,11 @@ full.rf <- function(){
 #'
 #' Creates team DUN submission file
 #'
-#' @param train full training set.
-#' @param test full test set.
+#' @param train Full training set.
+#' @param test Full test set.
 #' @return A data frame with id and popularity columns
-full.xgb <- function(){
+#' @export
+full.xgb <- function(train,test){
 
   param <- list("objective"="multi:softmax",
                 "eval_metric"="merror",
@@ -89,6 +92,3 @@ full.xgb <- function(){
   write.csv(submission, file = "1_DUN_xgb_r_gsenews.csv", row.names=FALSE)
   return(submission)
 }
-
-#' packages
-#' @import xgboost randomForest

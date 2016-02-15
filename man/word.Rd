@@ -4,14 +4,14 @@
 \alias{word}
 \title{Word frequency}
 \usage{
-word(a)
+word(a, train, test)
 }
 \arguments{
 \item{a}{String of a single word.}
 
-\item{train}{full training set.}
+\item{train}{Full training set.}
 
-\item{test}{full test set.}
+\item{test}{Full test set.}
 }
 \value{
 A list with following elements: freqdiff, diff, freqtrain, freqtest

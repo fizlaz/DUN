@@ -4,12 +4,12 @@
 \alias{full.rf}
 \title{DUN random forest model}
 \usage{
-full.rf()
+full.rf(train, test)
 }
 \arguments{
-\item{train}{full training set.}
+\item{train}{Full training set.}
 
-\item{test}{full test set.}
+\item{test}{Full test set.}
 }
 \value{
 A data frame with id and popularity columns

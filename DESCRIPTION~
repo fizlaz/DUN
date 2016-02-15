@@ -1,7 +1,7 @@
 Package: DUN
 Title: Team DUN Kaggle milestone
 Version: 0.0.0.9000
-Author: Domagoj Fizulic <d.fizulic@gmail.com>, Uwe Hönig, Niti Mishra
+Author: Domagoj Fizulic <d.fizulic@gmail.com>, Uwe Honig, Niti Mishra
 Maintainer: Domagoj Fizulic <d.fizulic@gmail.com>
 Description: To reproduce our current submissions please run full.rf and full.xgb.
 	These functions will automatically return and save submissions in the appropriate
