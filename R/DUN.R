@@ -7,6 +7,7 @@
 #'
 #' @param a String of a single word.
 #' @return A list with following elements: freqdiff, diff, freqtrain, freqtest
+#' @export
 word <- function(a){
   titles <- substr(train[,2],32,nchar(train[,2])-1)
   titlestest <- substr(test[,2],32,nchar(test[,2])-1)
@@ -42,6 +43,7 @@ word <- function(a){
 #' Creates team DUN submission file
 #'
 #' @return A data frame with id and popularity columns
+#' @export
 full.rf <- function(){
 
   rf <- randomForest::randomForest(train[,-c(1,2,62)], as.factor(train$popularity), ntree=1000,
@@ -61,6 +63,7 @@ full.rf <- function(){
 #' Creates team DUN submission file
 #'
 #' @return A data frame with id and popularity columns
+#' @export
 full.xgb <- function(){
 
   param <- list("objective"="multi:softmax",
