@@ -530,7 +530,7 @@ cv.mab <- function(train, rounds=250){
       print(j) # tracing progress
       print(mabpred)
 
-      mab <- maboost(ktrain[,-c],ktrain$popularity, iter=round)
+      mab <- maboost(ktrain[,-c],ktrain$popularity, iter=rounds)
 
       predictions <- predict(mab,ktest[,-c])
       mabsum <- confusionMatrix(predictions, ktest$popularity)
