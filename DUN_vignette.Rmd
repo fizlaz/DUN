@@ -5,7 +5,7 @@ date: "14 Mar 2016"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{DUN_vignette}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   \usepackage[utf8](inputenc)
 ---
 
