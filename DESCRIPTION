@@ -8,6 +8,8 @@ Description: To reproduce our current submissions please run full.rf and full.xg
 	.csv format.
 Depends:
     R (>= 3.2.1)
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
 License: see LICENSE
 LazyData: true
 Type: Package
