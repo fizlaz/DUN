@@ -87,10 +87,15 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h2>Descriptions</h2>
 <p>This vignette shows a few examples of the main functions within DUN package. You can use R built-in function - <em>getAnywhere( )</em>, to see the internal method of any of these functions.<br /><br></p>
 <p><strong>1. Cross Validation</strong></p>
-<p>Cross Validation is a model validation technique used in a predictive model that provides an insight on how the model will generalize to an independent dataset. In cross-validation, you make a fixed number of folds (or partitions) of the data, run the analysis on each fold, and then average the overall error estimate. <br></p>
+<p>Cross Validation is a model validation technique used in a predictive model that provides an insight on how the model will generalize to an independent dataset. In cross-validation, you make a fixed number of folds (or partitions) of the data, run the analysis on each fold, and then average the overall error estimate.</p>
+<p>The function starting with <em>“cv.”</em> performs cross validation on a training set data by first creating indices (using <em>createFolds()</em> function from “caret” package) that define which data are held out from the <em>k</em>-separate folds. The value of k is set to 5. These indices are then used to create 5 different sets of train and test datasets out of the original training set.</p>
+<p>Depending on which <em>cv.</em> function you use, it performs an algorithm in each set of train datasets and creates predictions on the respective test datasets.</p>
 <ul>
-<li><strong>cv.mab</strong> : This function performs cross validation on a training set data by first creating indices (using <em>createFolds()</em> function from “caret” package) that define which data are held out from the <em>k</em>-separate folds. The value of k is set to 5. These indices are then used to create 5 different sets of train and test datasets out of the original training set. It performs a boosting algorithm (using <em>maboost</em> function from “maboost” package) in each set of train datasets and creates predictions on the respective test datasets. The number of iteration for the algorithm is set to 250. It then compares the predicted labels and actual labels to calculates the overall accuracy rate for each fold.<br /><br> The final output of the function is a list containing the overall accuracy rates of each fold and their average along with the Confusion Matrix, and Kappa statistic values.<br /><br> Below we show an example for the use of this function.</li>
+<li><strong>cv.mab</strong>: uses <em>maboost</em> function from “maboost” package. The number of iteration for the algorithm is set to 250.<br /><br></li>
+<li><strong>cv.rf</strong>: uses Breiman’s random forest algorithm as defined in <em>randomForest()</em> function in base R. The number of trees for random forest algorithm is set to 400.<br /><br></li>
+<li><strong>cv.xgb</strong>: uses <em>xgboost()</em> method as define in “xgboost”&quot; library in R. The number of iteration for the algorithm is set to 250.</li>
 </ul>
+<p>Finally, it compares the predicted labels and actual labels to calculates the overall accuracy rate for each fold. The final output of these functions is a list containing the overall accuracy rates of each fold and their average along with the Confusion Matrix, and Kappa statistic values.<br /><br> Below we show an example for <em>cv.mab</em> function:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create artificial dataset</span>
 <span class="co"># inputsTest &lt;- matrix(rnorm(200), ncol=2)</span>
 <span class="co"># inputsTrain &lt;- matrix(rnorm(200), ncol=2)</span>
@@ -98,17 +103,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <span class="co"># cv.mab(train=inputsTrain)</span>
 <span class="co">#SHOULD we add that url column cannot be used???????????? ONLY ACCEPTS NUMERIC COLUMNS</span>
 <span class="co"># and that column names have to be good????????</span></code></pre>
-<ul>
-<li><strong>cv.rf</strong> : This function performs cross validation on a training set data by using Breiman’s random forest algorithm as defined in <em>randomForest()</em> function in base R. The number of trees for random forest algorithm is set to 400. As with the previous function, indices are defined to create 5 different sets of train and test datasets out of the original training set. It then calculates the overall accuracy rate for each fold by comparing the predicted labels from random forest and the actual labels.<br /><br> The final output of the function is a list containing the overall accuracy rates of each fold and their average along with the Confusion Matrix, and Kappa statistic values.<br /><br> Below we show an example for the use of this function.</li>
-</ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># example dataset</span>
-<span class="co"># function test</span></code></pre>
-<ul>
-<li><strong>cv.xgb</strong> : You may choose cv.xgb function if you wish to perform cross validation on your training set data by using <em>xgboost()</em> method as define in “xgboost”&quot; library in R. Once again, the train dataset is partitioned into 5 different sets of train and test datasets out of the original training set. The function performs xgboost algorithm on each set of train datasets and creates predictions on the respective test datasets. The number of iteration for the algorithm is set to 250.<br /><br> The final output of the function is a list containing the overall accuracy rates of each fold and their average along with the Confusion Matrix, and Kappa statistic values.<br /><br> Below we show an example for the use of this function.</li>
-</ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># example dataset</span>
-<span class="co"># function test</span></code></pre>
-<p><strong>1. F</strong></p>
+<p><strong>2. F</strong></p>
+<p><strong>3. Full</strong></p>
 </div>
 
 
