@@ -255,9 +255,11 @@ fmeta.knnprob <- function(train,test=NULL,csv=FALSE){#fix test part
 #' @param test Test set without ID and URL. If left empty then it the
 #' functions trains on train with 5 fold cross validation
 #' @param csv Boolean, default FALSE. If TRUE, saves csv output.
+#' @param trees Number of trees per fold, default 1000.
+#' @param verbose Boolean, default FALSE. If TRUE, prints output.
 #' @return A data frame with 5 probabilites for each row
 #' @export
-fmeta.rf <- function(train,test=NULL,csv=FALSE){
+fmeta.rf <- function(train,test=NULL,csv=FALSE, trees=1000, verbose=FALSE){
 
   base::library(randomForest)
 
@@ -278,7 +280,7 @@ fmeta.rf <- function(train,test=NULL,csv=FALSE){
       print(j) # tracing progress
 
       set.seed(1234)
-      rf <- randomForest(ktrain[,-c], as.factor(ktrain$popularity), ntree=800,
+      rf <- randomForest(ktrain[,-c], as.factor(ktrain$popularity), ntree=trees,
                          importance=TRUE, do.trace=TRUE)
 
       rfpred[ flds[[j]],6] <- predict(rf, ktest)
@@ -297,8 +299,8 @@ fmeta.rf <- function(train,test=NULL,csv=FALSE){
   else{ # test set loaded
     print("test set loaded, learning on train and predicting on test")
     set.seed(1234)
-    rf <- randomForest(train[,-c], as.factor(train$popularity), ntree=1000,
-                       importance=TRUE, do.trace=TRUE)
+    rf <- randomForest(train[,-c], as.factor(train$popularity), ntree=trees,
+                       importance=TRUE, do.trace=verbose)
 
     rfmetapred <- predict(rf, test)
     rfmetaprob <- predict(rf, test, type = "prob")
@@ -325,10 +327,11 @@ fmeta.rf <- function(train,test=NULL,csv=FALSE){
 #' @param test Test set without ID and URL. If left empty then it the
 #' functions trains on train with 5 fold cross validation
 #' @param folds Number of cross validation folds
+#' @param nrounds Number of rounds per fold, default 250
 #' @param csv Boolean, default FALSE. If TRUE, saves csv output.
 #' @return A data frame with 5 probabilites for each row
 #' @export
-fmeta.xgb <- function(train,test=NULL,folds=5,csv=FALSE){
+fmeta.xgb <- function(train,test=NULL,folds=5, nrounds=250, csv=FALSE){
 
   base::library(xgboost)
 
@@ -372,7 +375,7 @@ fmeta.xgb <- function(train,test=NULL,folds=5,csv=FALSE){
       print(j) #tracking progress
 
       bst <- xgboost(params = param, data = as.matrix(ktrain[,-c]),label = t,
-                     nrounds = 250)#200
+                     nrounds = nrounds)#200
 
       xgbpred[ flds[[j]], ] <- predict(bst, as.matrix(ktest))
 
@@ -391,7 +394,7 @@ fmeta.xgb <- function(train,test=NULL,folds=5,csv=FALSE){
     print("test set loaded, learning on train and predicting on test")
 
     bst <- xgboost(params = param, data = as.matrix(train[,-c]),label = y,
-                   nrounds = 250)
+                   nrounds = nrounds)
 
     xgbpred <- predict(bst, as.matrix(test))
     xgbpred <- matrix(xgbpred,ncol=5,byrow=TRUE)

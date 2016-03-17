@@ -4,7 +4,7 @@
 \alias{fmeta.xgb}
 \title{xgboost meta predictor}
 \usage{
-fmeta.xgb(train, test = NULL, folds = 5, csv = FALSE)
+fmeta.xgb(train, test = NULL, folds = 5, nrounds = 250, csv = FALSE)
 }
 \arguments{
 \item{train}{Train set without ID and URL}
@@ -13,6 +13,8 @@ fmeta.xgb(train, test = NULL, folds = 5, csv = FALSE)
 functions trains on train with 5 fold cross validation}
 
 \item{folds}{Number of cross validation folds}
+
+\item{nrounds}{Number of rounds per fold, default 250}
 
 \item{csv}{Boolean, default FALSE. If TRUE, saves csv output.}
 }
