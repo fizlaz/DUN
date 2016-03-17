@@ -281,7 +281,7 @@ fmeta.rf <- function(train,test=NULL,csv=FALSE, trees=1000, verbose=FALSE){
 
       set.seed(1234)
       rf <- randomForest(ktrain[,-c], as.factor(ktrain$popularity), ntree=trees,
-                         importance=TRUE, do.trace=TRUE)
+                         importance=TRUE, do.trace=verbose)
 
       rfpred[ flds[[j]],6] <- predict(rf, ktest)
       rfpred[ flds[[j]],1:5] <- predict(rf,ktest,type = "prob")
