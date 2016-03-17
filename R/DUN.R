@@ -329,9 +329,10 @@ fmeta.rf <- function(train,test=NULL,csv=FALSE, trees=1000, verbose=FALSE){
 #' @param folds Number of cross validation folds
 #' @param nrounds Number of rounds per fold, default 250
 #' @param csv Boolean, default FALSE. If TRUE, saves csv output.
+#' @param verbose 0(quiet),1(evaluation metric),2(+tree information), default 1
 #' @return A data frame with 5 probabilites for each row
 #' @export
-fmeta.xgb <- function(train,test=NULL,folds=5, nrounds=250, csv=FALSE){
+fmeta.xgb <- function(train,test=NULL,folds=5,nrounds=250,csv=FALSE, verbose=1){
 
   base::library(xgboost)
 
@@ -375,7 +376,7 @@ fmeta.xgb <- function(train,test=NULL,folds=5, nrounds=250, csv=FALSE){
       print(j) #tracking progress
 
       bst <- xgboost(params = param, data = as.matrix(ktrain[,-c]),label = t,
-                     nrounds = nrounds)#200
+                     nrounds = nrounds, verbose=verbose)#200
 
       xgbpred[ flds[[j]], ] <- predict(bst, as.matrix(ktest))
 
@@ -394,7 +395,7 @@ fmeta.xgb <- function(train,test=NULL,folds=5, nrounds=250, csv=FALSE){
     print("test set loaded, learning on train and predicting on test")
 
     bst <- xgboost(params = param, data = as.matrix(train[,-c]),label = y,
-                   nrounds = nrounds)
+                   nrounds = nrounds, verbose=verbose)
 
     xgbpred <- predict(bst, as.matrix(test))
     xgbpred <- matrix(xgbpred,ncol=5,byrow=TRUE)
