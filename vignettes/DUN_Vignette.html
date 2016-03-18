@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Dom, Uwe, Niti" />
+
+<meta name="date" content="2016-01-01" />
+
+<title>DUN Vignette</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+
+
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%7D%0Apre%20%7B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="fluid-row" id="header">
+
+
+<h1 class="title">DUN Vignette</h1>
+<h4 class="author"><em>Dom, Uwe, Niti</em></h4>
+<h4 class="date"><em>2016</em></h4>
+
+</div>
+
+
+<div id="introduction" class="section level2">
+<h2>1 Introduction</h2>
+<p>This vignete will show our exact methods used for in-class Kaggle Online news popularity competition. The raw data is split into 30,000 * 62 training set and 9,644 * 61 test set. This vignette will use a subsample of these sets.</p>
+<p>Our final model is based on a quite popular multi-layered approach. In the first layer we used fixed five folds to create metafeatures using 4 different classifiers. Metafeatures for the test set were created by training on the full train set. We considered several different classifiers for the first level and in the end kept the following:</p>
+<ul>
+<li>Random Forest (1000 trees, probability output)</li>
+<li>Xgboost (250 rounds, softprob, optimised using grid search in caret package)</li>
+<li>AdaBoost (250 rounds, maboost package)</li>
+<li>Multinomial logistic regression (glmnet package)</li>
+</ul>
+<p>In the second layer we again optimize parameters of Xgboost using only metafeatures created in the first layer. We do the same for h2o Neural Net. Both models are then trained using the optimal parameters and with the softprob output.</p>
+<p>In the third layer we use arithmetic/geometric averaging to combine Xgboost and Neural Networks to produce the final classification.</p>
+</div>
+<div id="load-data" class="section level2">
+<h2>2 Load data</h2>
+<pre class="sourceCode r"><code class="sourceCode r">trainfull &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;news_popularity_training.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
+test  &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;news_popularity_test.csv&quot;</span>,  <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</code></pre>
+<p>Store test set id column needed later for creating the submission file.</p>
+<pre class="sourceCode r"><code class="sourceCode r">idcol &lt;-<span class="st"> </span>test[,<span class="dv">1</span>]</code></pre>
+<p>Remove id and url columns.</p>
+<pre class="sourceCode r"><code class="sourceCode r">trainfull &lt;-<span class="st"> </span>trainfull[,-<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]
+test &lt;-<span class="st"> </span>test[,-<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</code></pre>
+<p>Transform target variable into a factor.</p>
+<pre class="sourceCode r"><code class="sourceCode r">trainfull$popularity &lt;-<span class="st"> </span><span class="kw">as.factor</span>(trainfull$popularity)</code></pre>
+<p>Label frequency of full train set:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(trainfull$popularity)/<span class="kw">nrow</span>(trainfull)</code></pre>
+<pre><code>## 
+##           1           2           3           4           5 
+## 0.315933333 0.458800000 0.190400000 0.033300000 0.001566667</code></pre>
+<p>For the purpose of this vignette we will subsample 1347 rows from the trainset.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2949</span>)
+a1 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="kw">filter</span>(trainfull,popularity==<span class="dv">1</span>), <span class="dt">size=</span><span class="dv">400</span>)
+a2 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="kw">filter</span>(trainfull,popularity==<span class="dv">2</span>), <span class="dt">size=</span><span class="dv">600</span>)
+a3 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="kw">filter</span>(trainfull,popularity==<span class="dv">3</span>), <span class="dt">size=</span><span class="dv">200</span>)
+a4 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="kw">filter</span>(trainfull,popularity==<span class="dv">4</span>), <span class="dt">size=</span><span class="dv">100</span>)
+a5 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="kw">filter</span>(trainfull,popularity==<span class="dv">5</span>), <span class="dt">size=</span><span class="dv">47</span>)
+train &lt;-<span class="st"> </span><span class="kw">rbind</span>(a1,a2,a3,a4,a5)</code></pre>
+<p>For these examples we increase ratios for class label 4 and 5 in order to keep the set smaller and all of our models working.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(train$popularity)/<span class="kw">nrow</span>(train)</code></pre>
+<pre><code>## 
+##          1          2          3          4          5 
+## 0.29695620 0.44543430 0.14847810 0.07423905 0.03489235</code></pre>
+</div>
+<div id="creating-metafeatures-for-layer-1" class="section level2">
+<h2>3 Creating metafeatures for layer 1</h2>
+<div id="random-forest-layer-1" class="section level3">
+<h3>Random Forest layer 1</h3>
+<p>Next we run random forest and create first set of metafeatures. Our function splits data into 5 folds, trains on 4 and predicts on 1. We used 1000 trees per fold on the full trainset.</p>
+<pre class="sourceCode r"><code class="sourceCode r">rfmetatrain &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.rf</span>(train, <span class="dt">trees =</span> <span class="dv">30</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
+<pre><code>## randomForest 4.6-12</code></pre>
+<pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
+<pre><code>## 
+## Attaching package: 'randomForest'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     combine</code></pre>
+<pre><code>## [1] &quot;No test set, cross validating train set.&quot;</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## 
+## Attaching package: 'ggplot2'</code></pre>
+<pre><code>## The following object is masked from 'package:randomForest':
+## 
+##     margin</code></pre>
+<pre><code>## [1] &quot;fold&quot;
+## [1] 1
+## [1] &quot;fold&quot;
+## [1] 2
+## [1] &quot;fold&quot;
+## [1] 3
+## [1] &quot;fold&quot;
+## [1] 4
+## [1] &quot;fold&quot;
+## [1] 5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">rfmetatest &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.rf</span>(train,<span class="dt">test =</span> test,<span class="dt">trees =</span> <span class="dv">30</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
+<pre><code>## [1] &quot;test set loaded, learning on train and predicting on test&quot;</code></pre>
+<p>Head:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(rfmetatrain)</code></pre>
+<pre><code>##        rfp1      rfp2       rfp3       rfp4       rfp5 rflabel
+## 1 0.5000000 0.3666667 0.06666667 0.03333333 0.03333333       1
+## 2 0.1666667 0.4333333 0.23333333 0.03333333 0.13333333       2
+## 3 0.1333333 0.5000000 0.23333333 0.10000000 0.03333333       2
+## 4 0.4000000 0.5000000 0.06666667 0.00000000 0.03333333       2
+## 5 0.7666667 0.2000000 0.00000000 0.03333333 0.00000000       1
+## 6 0.3000000 0.6000000 0.10000000 0.00000000 0.00000000       2</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(rfmetatest)</code></pre>
+<pre><code>##        rfp1      rfp2       rfp3       rfp4       rfp5 rflabel
+## 1 0.2333333 0.5333333 0.10000000 0.13333333 0.00000000       2
+## 2 0.4000000 0.3333333 0.16666667 0.06666667 0.03333333       1
+## 3 0.2333333 0.3000000 0.20000000 0.20000000 0.06666667       2
+## 4 0.6666667 0.3000000 0.03333333 0.00000000 0.00000000       1
+## 5 0.3666667 0.5000000 0.10000000 0.03333333 0.00000000       2
+## 6 0.1333333 0.4000000 0.30000000 0.03333333 0.13333333       2</code></pre>
+<p>Notice that the sixth column is predicted label. This will not be used as a metafeature later on.</p>
+<pre class="sourceCode r"><code class="sourceCode r">rfmetatrain &lt;-<span class="st"> </span>rfmetatrain[,<span class="dv">1</span>:<span class="dv">5</span>]
+rfmetatest &lt;-<span class="st"> </span>rfmetatest[,<span class="dv">1</span>:<span class="dv">5</span>]</code></pre>
+</div>
+<div id="xgboost-layer-1" class="section level3">
+<h3>Xgboost layer 1</h3>
+<p>Now create meta features with Xgboost. These are created on same fixed five folds. Xgboost parameters were optimised using caret package grid search. Please refer to the vignette appendix.</p>
+<pre class="sourceCode r"><code class="sourceCode r">xgmetatrain &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.xgb</span>(train,<span class="dt">nrounds =</span> <span class="dv">30</span>, <span class="dt">verbose =</span> <span class="dv">0</span>)</code></pre>
+<pre><code>## 
+## Attaching package: 'xgboost'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     slice</code></pre>
+<pre><code>## [1] &quot;No test set, cross validating train set.&quot;
+## [1] &quot;fold&quot;
+## [1] 1
+## [1] &quot;fold&quot;
+## [1] 2
+## [1] &quot;fold&quot;
+## [1] 3
+## [1] &quot;fold&quot;
+## [1] 4
+## [1] &quot;fold&quot;
+## [1] 5
+## [1] &quot;fold looping complete&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">xgmetatest &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.xgb</span>(train, <span class="dt">test =</span> test, <span class="dt">nrounds =</span> <span class="dv">30</span>, <span class="dt">verbose =</span> <span class="dv">0</span>)</code></pre>
+<pre><code>## [1] &quot;test set loaded, learning on train and predicting on test&quot;</code></pre>
+<p>Print head:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(xgmetatrain)</code></pre>
+<pre><code>##       xgbp1     xgbp2     xgbp3     xgbp4     xgbp5
+## 1 0.3067535 0.1128550 0.1408965 0.1122514 0.4101729
+## 2 0.2023819 0.3287976 0.2788310 0.2161369 0.3141597
+## 3 0.1962564 0.1252225 0.1204360 0.1646375 0.3873491
+## 4 0.3747770 0.1736327 0.1160845 0.1437512 0.1519284
+## 5 0.2967321 0.4243000 0.1248465 0.1097733 0.1703701
+## 6 0.1736208 0.2461592 0.1941922 0.1410360 0.1359991</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(xgmetatest)</code></pre>
+<pre><code>##       xgbp1     xgbp2     xgbp3     xgbp4     xgbp5
+## 1 0.2615191 0.3318696 0.1522494 0.1325101 0.1218518
+## 2 0.2603344 0.3052537 0.1718682 0.1429314 0.1196121
+## 3 0.2708087 0.1722364 0.1905442 0.2429086 0.1235021
+## 4 0.4219496 0.2118131 0.1265353 0.1237301 0.1159721
+## 5 0.2912273 0.3036822 0.1527278 0.1291661 0.1231965
+## 6 0.2095685 0.2663572 0.1956177 0.1852869 0.1431697</code></pre>
+</div>
+<div id="maboostadaboost-layer-1" class="section level3">
+<h3>maboost(AdaBoost) layer 1</h3>
+<p>Next create metafeatures on same folds with AdaBoost. We use maboost package which enables multiclass AdaBoost.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mabmetatrain &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.mab</span>(train,<span class="dt">rounds =</span> <span class="dv">30</span>)</code></pre>
+<pre><code>## Loading required package: rpart</code></pre>
+<pre><code>## Loading required package: C50</code></pre>
+<pre><code>## [1] &quot;No test set, cross validating train set.&quot;
+## [1] &quot;fold&quot;
+## [1] 1
+## [1] &quot;Multiclass boosting is selected&quot;
+## [1] &quot;fold&quot;
+## [1] 2
+## [1] &quot;Multiclass boosting is selected&quot;
+## [1] &quot;fold&quot;
+## [1] 3
+## [1] &quot;Multiclass boosting is selected&quot;
+## [1] &quot;fold&quot;
+## [1] 4
+## [1] &quot;Multiclass boosting is selected&quot;
+## [1] &quot;fold&quot;
+## [1] 5
+## [1] &quot;Multiclass boosting is selected&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mabmetatest &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.mab</span>(train,<span class="dt">test =</span> test, <span class="dt">rounds =</span> <span class="dv">30</span>)</code></pre>
+<pre><code>## [1] &quot;test set loaded, learning on train and predicting on test&quot;
+## [1] &quot;Multiclass boosting is selected&quot;</code></pre>
+<p>Print head:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mabmetatrain)</code></pre>
+<pre><code>##       mabp1     mabp2      mabp3      mabp4      mabp5        mabF1
+## 1 0.4572706 0.3733595 0.11009286 0.05927710 0.00000000 0.0005181254
+## 2 0.2713871 0.3875300 0.18977748 0.09426166 0.05704379 0.0002834809
+## 3 0.2562182 0.3443722 0.36286118 0.03654840 0.00000000 0.0002848129
+## 4 0.2835928 0.4755093 0.18364732 0.04109925 0.01615134 0.0003152426
+## 5 0.5118863 0.3302087 0.07616845 0.08173654 0.00000000 0.0005800095
+## 6 0.4571852 0.3718660 0.06554734 0.07943201 0.02596946 0.0005082084
+##          mabF2        mabF3        mabF4        mabF5
+## 1 0.0004230472 1.247443e-04 6.716586e-05 0.000000e+00
+## 2 0.0004047995 1.982346e-04 9.846225e-05 5.958584e-05
+## 3 0.0003828052 4.033576e-04 4.062731e-05 0.000000e+00
+## 4 0.0005285775 2.041429e-04 4.568605e-05 1.795388e-05
+## 5 0.0003741538 8.630516e-05 9.261426e-05 0.000000e+00
+## 6 0.0004133674 7.286262e-05 8.829686e-05 2.886772e-05</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mabmetatest)</code></pre>
+<pre><code>##        mabp1     mabp2      mabp3      mabp4 mabp5        mabF1
+## 1 0.47600402 0.2927019 0.18587365 0.04542045     0 3.594168e-04
+## 2 0.41157420 0.4208645 0.10616159 0.06139968     0 3.107677e-04
+## 3 0.33245581 0.2103433 0.21378307 0.24341781     0 2.510277e-04
+## 4 0.62062616 0.3579223 0.02145151 0.00000000     0 4.686167e-04
+## 5 0.34835601 0.5385614 0.09163106 0.02145151     0 2.630335e-04
+## 6 0.03478679 0.3939962 0.33691926 0.23429775     0 2.626649e-05
+##          mabF2        mabF3        mabF4 mabF5
+## 1 0.0002210107 1.403478e-04 3.429566e-05     0
+## 2 0.0003177826 8.015952e-05 4.636111e-05     0
+## 3 0.0001588241 1.614214e-04 1.837977e-04     0
+## 4 0.0002702567 1.619741e-05 0.000000e+00     0
+## 5 0.0004066520 6.918795e-05 1.619741e-05     0
+## 6 0.0002974951 2.543979e-04 1.769114e-04     0</code></pre>
+<p>First 5 columns are probability class estimates. Columns 6:10 are ensamble averages produces by selecting type=“F” in predict.maboost. These have 0.99 correlation with class probabilites and we use only columns 1:5 further on.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mabmetatrain &lt;-<span class="st"> </span>mabmetatrain[,<span class="dv">1</span>:<span class="dv">5</span>]
+mabmetatest &lt;-<span class="st"> </span>mabmetatest[,<span class="dv">1</span>:<span class="dv">5</span>]</code></pre>
+</div>
+<div id="multinomial-logistic-layer-1" class="section level3">
+<h3>Multinomial Logistic layer 1</h3>
+<p>Next we create metafeatures wiht multinomial logistic regression. We use glmnet package.</p>
+<pre class="sourceCode r"><code class="sourceCode r">glmmetatrain &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.glm</span>(train)</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## Loading required package: foreach</code></pre>
+<pre><code>## Loaded glmnet 2.0-4</code></pre>
+<pre><code>## [1] &quot;No test set, cross validating train set.&quot;
+## [1] &quot;fold&quot;
+## [1] 1
+## [1] &quot;fold&quot;
+## [1] 2
+## [1] &quot;fold&quot;
+## [1] 3
+## [1] &quot;fold&quot;
+## [1] 4
+## [1] &quot;fold&quot;
+## [1] 5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">glmmetatest &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.glm</span>(train,<span class="dt">test =</span> test)</code></pre>
+<pre><code>## [1] &quot;test set loaded, learning on train and predicting on test&quot;</code></pre>
+<p>Print head:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(glmmetatrain)</code></pre>
+<pre><code>##       glmp1     glmp2     glmp3      glmp4      glmp5
+## 1 0.3821564 0.3901132 0.1310679 0.06553396 0.03112863
+## 2 0.3140781 0.4021883 0.1638895 0.08194469 0.03789941
+## 3 0.3169875 0.4576818 0.1316698 0.06317013 0.03049089
+## 4 0.4652534 0.3584626 0.1042513 0.04887125 0.02316145
+## 5 0.3899101 0.3780845 0.1335283 0.06676414 0.03171297
+## 6 0.3213549 0.4529156 0.1334084 0.06285855 0.02946264</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(glmmetatest)</code></pre>
+<pre><code>##       glmp1     glmp2     glmp3      glmp4      glmp5
+## 1 0.1700220 0.5101357 0.1843472 0.09217354 0.04332155
+## 2 0.3138844 0.4085017 0.1600080 0.08000397 0.03760186
+## 3 0.3562509 0.3501097 0.1692447 0.08462227 0.03977246
+## 4 0.4046689 0.3767434 0.1259872 0.06299354 0.02960696
+## 5 0.3121061 0.4352565 0.1456124 0.07280615 0.03421888
+## 6 0.1653496 0.4920719 0.1974517 0.09872577 0.04640110</code></pre>
+</div>
+</div>
+<div id="training-layer-2-models" class="section level2">
+<h2>4 Training layer 2 models</h2>
+<p>First combine metafeatures from the first layer which are used for training models in the second layer.</p>
+<pre class="sourceCode r"><code class="sourceCode r">metatrain2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(train$popularity,rfmetatrain,xgmetatrain,mabmetatrain)
+<span class="kw">names</span>(metatrain2)[<span class="dv">1</span>]&lt;-<span class="st">&quot;popularity&quot;</span>
+metatest2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(rfmetatest,xgmetatest,mabmetatest)</code></pre>
+<div id="xgboost-layer-2" class="section level3">
+<h3>Xgboost layer 2</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xgboost)
+
+param &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;objective&quot;</span>=<span class="st">&quot;multi:softprob&quot;</span>,
+              <span class="st">&quot;eval_metric&quot;</span>=<span class="st">&quot;merror&quot;</span>,
+              <span class="st">&quot;num_class&quot;</span>=<span class="dv">5</span>,
+              <span class="st">&quot;booster&quot;</span>=<span class="st">&quot;gbtree&quot;</span>,
+              <span class="st">&quot;eta&quot;</span>=<span class="fl">0.01</span>,
+              <span class="st">&quot;max_depth&quot;</span>=<span class="dv">6</span>,
+              <span class="st">&quot;subsample&quot;</span>=<span class="fl">0.8</span>,
+              <span class="st">&quot;colsample_bytree&quot;</span>=<span class="fl">0.6</span>)
+
+y&lt;-<span class="kw">as.integer</span>(metatrain2$popularity)-<span class="dv">1</span>
+
+bst &lt;-<span class="st"> </span><span class="kw">xgboost</span>(<span class="dt">params =</span> param, <span class="dt">data =</span> <span class="kw">as.matrix</span>(metatrain2[,-<span class="dv">1</span>]),<span class="dt">label =</span> y,
+               <span class="dt">nrounds =</span> <span class="dv">30</span>, <span class="dt">verbose =</span> <span class="dv">0</span>)
+
+preds &lt;-<span class="st"> </span><span class="kw">predict</span>(bst,<span class="kw">as.matrix</span>(metatest2))
+xgbprob &lt;-<span class="st"> </span><span class="kw">matrix</span>(preds,<span class="dt">ncol=</span><span class="dv">5</span>,<span class="dt">byrow=</span><span class="ot">TRUE</span>)</code></pre>
+</div>
+<div id="h2o-neural-networks-layer-2" class="section level3">
+<h3>h2o Neural networks layer 2</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(h2o)</code></pre>
+<pre><code>## Loading required package: statmod</code></pre>
+<pre><code>## 
+## ----------------------------------------------------------------------
+## 
+## Your next step is to start H2O:
+##     &gt; h2o.init()
+## 
+## For H2O package documentation, ask for help:
+##     &gt; ??h2o
+## 
+## After starting H2O, you can use the Web UI at http://localhost:54321
+## For more information visit http://docs.h2o.ai
+## 
+## ----------------------------------------------------------------------</code></pre>
+<pre><code>## 
+## Attaching package: 'h2o'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     sd, var</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     %*%, apply, as.factor, as.numeric, colnames, colnames&lt;-,
+##     ifelse, %in%, is.factor, is.numeric, log, trunc</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">localH2O =<span class="st"> </span><span class="kw">h2o.init</span>(<span class="dt">nthreads=</span>-<span class="dv">1</span>)</code></pre>
+<pre><code>## Successfully connected to http://127.0.0.1:54321/ 
+## 
+## R is connected to the H2O cluster: 
+##     H2O cluster uptime:         1 days 5 hours 
+##     H2O cluster version:        3.6.0.8 
+##     H2O cluster name:           H2O_started_from_R_fizlaz_lep468 
+##     H2O cluster total nodes:    1 
+##     H2O cluster total memory:   1.71 GB 
+##     H2O cluster total cores:    4 
+##     H2O cluster allowed cores:  4 
+##     H2O cluster healthy:        TRUE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">data_train_h &lt;-<span class="st"> </span><span class="kw">as.h2o</span>(metatrain2,<span class="dt">destination_frame =</span> <span class="st">&quot;h2o_data_train&quot;</span>)</code></pre>
+<pre><code>## 
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |=================================================================| 100%</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">data_test_h &lt;-<span class="st"> </span><span class="kw">as.h2o</span>(metatest2,<span class="dt">destination_frame =</span> <span class="st">&quot;h2o_data_test&quot;</span>)</code></pre>
+<pre><code>## 
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |=================================================================| 100%</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> &quot;popularity&quot;</span>
+x &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="kw">names</span>(data_train_h), y)
+
+data_train_h[,y] &lt;-<span class="st"> </span><span class="kw">as.factor</span>(data_train_h[,y])
+
+model &lt;-<span class="st"> </span><span class="kw">h2o.deeplearning</span>(<span class="dt">x =</span> x,
+                          <span class="dt">y =</span> y,
+                          <span class="dt">training_frame =</span> data_train_h,
+                          <span class="co">#validation_frame = data_test_h,</span>
+                          <span class="dt">distribution =</span> <span class="st">&quot;multinomial&quot;</span>,
+                          <span class="dt">activation =</span> <span class="st">&quot;RectifierWithDropout&quot;</span>,
+                          <span class="dt">hidden =</span> <span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">20</span>),
+                          <span class="dt">input_dropout_ratio =</span> <span class="fl">0.2</span>,
+                          <span class="dt">l1 =</span> <span class="fl">1e-7</span>,
+                          <span class="dt">epochs =</span> <span class="dv">10</span>)</code></pre>
+<pre><code>## 
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |======                                                           |  10%
+  |                                                                       
+  |=================================================================| 100%</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
+pred &lt;-<span class="st"> </span><span class="kw">h2o.predict</span>(model, <span class="dt">newdata =</span> data_test_h)
+nnprob &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(pred[,<span class="dv">2</span>:<span class="dv">6</span>])
+
+<span class="kw">h2o.shutdown</span>()</code></pre>
+<pre><code>## Are you sure you want to shutdown the H2O instance running at http://127.0.0.1:54321/ (Y/N)?</code></pre>
+</div>
+</div>
+<div id="third-and-final-layer" class="section level2">
+<h2>5 Third and final layer</h2>
+<p>In this layer we perform arithmetic and geometric averaging of second layer model predictions.</p>
+<p>Head of 2nd layer probability class estimates.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(xgbprob)</code></pre>
+<pre><code>##           [,1]      [,2]      [,3]      [,4]      [,5]
+## [1,] 0.2392463 0.2378115 0.1831146 0.1710245 0.1688032
+## [2,] 0.2214223 0.2279395 0.2030976 0.1748551 0.1726855
+## [3,] 0.2029420 0.2325867 0.1967959 0.1941885 0.1734868
+## [4,] 0.2382281 0.2292276 0.1892001 0.1689848 0.1743594
+## [5,] 0.2598159 0.2264598 0.1823115 0.1666395 0.1647732
+## [6,] 0.1877049 0.2404355 0.2173201 0.1768156 0.1777239</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(nnprob)</code></pre>
+<pre><code>##             p1        p2        p3         p4          p5
+## [1,] 0.2912386 0.5024724 0.1033502 0.07951533 0.023423424
+## [2,] 0.3372522 0.4574122 0.1238175 0.06011707 0.021401018
+## [3,] 0.2851380 0.4452661 0.1487303 0.08269638 0.038169149
+## [4,] 0.4842989 0.4610356 0.0331811 0.01646892 0.005015449
+## [5,] 0.3297829 0.4825054 0.1028856 0.06787000 0.016956119
+## [6,] 0.2452145 0.4224020 0.1988514 0.09276929 0.040762843</code></pre>
+<div id="arithmetic-average." class="section level3">
+<h3>Arithmetic average.</h3>
+<p>Optimal weights were computed using the avg.arit function found in the appendix.</p>
+<pre class="sourceCode r"><code class="sourceCode r">arit &lt;-<span class="st"> </span>function(vec){
+  pred &lt;-<span class="st"> </span><span class="kw">which.max</span>(vec[<span class="dv">1</span>:<span class="dv">5</span>]*(<span class="fl">0.76</span>) +<span class="st"> </span>vec[<span class="dv">6</span>:<span class="dv">10</span>]*(<span class="fl">0.24</span>))
+  <span class="kw">return</span>(pred)
+}
+
+combined &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgbprob,nnprob)
+finallabelsarit &lt;-<span class="st"> </span><span class="kw">apply</span>(combined,<span class="dv">1</span>,arit)
+<span class="kw">head</span>(finallabelsarit)</code></pre>
+<pre><code>## [1] 2 2 2 1 2 2</code></pre>
+</div>
+<div id="geometric-average." class="section level3">
+<h3>Geometric average.</h3>
+<p>Optimal weights were computed using the avg.geom function found in the appendix.</p>
+<pre class="sourceCode r"><code class="sourceCode r">geom &lt;-<span class="st"> </span>function(vec){
+  pred &lt;-<span class="st"> </span><span class="kw">which.max</span>(vec[<span class="dv">1</span>:<span class="dv">5</span>]^(<span class="fl">0.76</span>) *<span class="st"> </span>vec[<span class="dv">6</span>:<span class="dv">10</span>]^(<span class="fl">0.24</span>))
+  <span class="kw">return</span>(pred)
+}
+
+combined &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgbprob,nnprob)
+finallabelsgeom &lt;-<span class="st"> </span><span class="kw">apply</span>(combined,<span class="dv">1</span>,geom)
+<span class="kw">head</span>(finallabelsgeom)</code></pre>
+<pre><code>## [1] 2 2 2 1 1 2</code></pre>
+</div>
+<div id="creating-submission-files" class="section level3">
+<h3>Creating submission files</h3>
+<pre class="sourceCode r"><code class="sourceCode r">submissionarit &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> idcol)
+submissionarit$popularity &lt;-<span class="st"> </span>finallabelsarit
+<span class="kw">write.csv</span>(submissionarit, <span class="dt">file =</span> <span class="st">&quot;arithmetic_r_gsenews.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>)
+
+submissiongeom &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> idcol)
+submissiongeom$popularity &lt;-<span class="st"> </span>finallabelsgeom
+<span class="kw">write.csv</span>(submissiongeom, <span class="dt">file =</span> <span class="st">&quot;geometric_r_gsenews.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>)</code></pre>
+</div>
+</div>
+<div id="appendix" class="section level2">
+<h2>6 Appendix</h2>
+<div id="optimising-xgboost" class="section level3">
+<h3>Optimising Xgboost</h3>
+<p>Below code is not executed for thid document as it takes some time to run. On the full train set it can easily run for more than 3 hours.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
+<span class="kw">library</span>(xgboost)
+<span class="kw">library</span>(readr)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(tidyr)
+
+df_train &lt;-<span class="st"> </span>train
+
+<span class="co"># set up the cross-validated hyper-parameter search</span>
+xgb_grid_1 =<span class="st"> </span><span class="kw">expand.grid</span>(
+  <span class="dt">nrounds =</span> <span class="kw">c</span>(<span class="dv">150</span>,<span class="dv">200</span>,<span class="dv">250</span>,<span class="dv">300</span>),
+  <span class="dt">eta =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.01</span>, <span class="fl">0.001</span>),
+  <span class="dt">max_depth =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>),
+  <span class="dt">gamma =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),
+  <span class="dt">colsample_bytree =</span> <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>),    <span class="co">#default=1</span>
+  <span class="dt">min_child_weight =</span> <span class="dv">1</span>     <span class="co">#default=1</span>
+)
+
+
+<span class="co"># pack the training control parameters</span>
+xgb_trcontrol_1 =<span class="st"> </span><span class="kw">trainControl</span>(
+  <span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>,
+  <span class="dt">number =</span> <span class="dv">5</span>,
+  <span class="dt">verboseIter =</span> <span class="ot">TRUE</span>,
+  <span class="dt">returnData =</span> <span class="ot">FALSE</span>,
+  <span class="dt">returnResamp =</span> <span class="st">&quot;all&quot;</span>,                       <span class="co"># save losses across all models</span>
+  <span class="dt">classProbs =</span> <span class="ot">TRUE</span>,                     <span class="co"># set to TRUE for AUC to be computed</span>
+  <span class="co">#summaryFunction = twoClassSummary,</span>
+  <span class="dt">summaryFunction =</span> defaultSummary,
+  <span class="dt">allowParallel =</span> <span class="ot">TRUE</span>
+)
+
+z &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="st">&quot;Label&quot;</span>, paste0, df_train$popularity ))
+
+xgb_train_1 =<span class="st"> </span><span class="kw">train</span>(
+  <span class="dt">x =</span> <span class="kw">as.matrix</span>(df_train %&gt;%
+<span class="st">                  </span><span class="kw">select</span>(-popularity)),
+  <span class="dt">y =</span> <span class="kw">as.factor</span>(z),
+  <span class="dt">trControl =</span> xgb_trcontrol_1,
+  <span class="dt">tuneGrid =</span> xgb_grid_1,
+  <span class="dt">method =</span> <span class="st">&quot;xgbTree&quot;</span>
+)</code></pre>
+</div>
+<div id="arithmetic-and-geometric-averaging" class="section level3">
+<h3>Arithmetic and Geometric averaging</h3>
+<p>Arithmetic averaging</p>
+<pre class="sourceCode r"><code class="sourceCode r">avg.arit &lt;-<span class="st"> </span>function(mat1,mat2,<span class="dt">label=</span>train$popularity,<span class="dt">iter=</span><span class="dv">101</span>){
+  mat1 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mat1)
+  mat2 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mat2)
+  mat &lt;-<span class="st"> </span><span class="kw">cbind</span>(mat1,mat2)
+  result &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>,<span class="dt">nrow=</span>iter,<span class="dt">ncol=</span><span class="dv">3</span>)
+  f &lt;-<span class="st"> </span>function(vec){
+    pred &lt;-<span class="st"> </span><span class="kw">which.max</span>(w*vec[<span class="dv">1</span>:<span class="dv">5</span>]+(<span class="dv">1</span>-w)*vec[<span class="dv">6</span>:<span class="dv">10</span>])
+    <span class="kw">return</span>(pred)
+  }
+  for(i in <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">length.out=</span>iter)){
+    <span class="kw">print</span>(i)
+    w&lt;-i
+    pred &lt;-<span class="st"> </span><span class="kw">apply</span>(mat,<span class="dv">1</span>,f)
+    score &lt;-<span class="st"> </span><span class="kw">sum</span>(pred==label)/<span class="kw">length</span>(label)
+    result[<span class="dv">1</span>+i/(<span class="dv">1</span>/(iter<span class="dv">-1</span>)),] &lt;-<span class="st"> </span><span class="kw">c</span>(i,(<span class="dv">1</span>-i),score)
+  }
+  <span class="kw">return</span>(result[<span class="kw">order</span>(result[,<span class="dv">3</span>],<span class="dt">decreasing=</span><span class="ot">TRUE</span>),])
+}</code></pre>
+<p>Geometric averaging</p>
+<pre class="sourceCode r"><code class="sourceCode r">avg.geom &lt;-<span class="st"> </span>function(mat1,mat2,<span class="dt">label=</span>train$popularity,<span class="dt">iter=</span><span class="dv">101</span>){
+  mat1 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mat1)
+  mat2 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mat2)
+  mat &lt;-<span class="st"> </span><span class="kw">cbind</span>(mat1,mat2)
+  result &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>,<span class="dt">nrow=</span>iter,<span class="dt">ncol=</span><span class="dv">3</span>)
+  f &lt;-<span class="st"> </span>function(vec){
+    pred &lt;-<span class="st"> </span><span class="kw">which.max</span>(vec[<span class="dv">1</span>:<span class="dv">5</span>]^(w) *<span class="st"> </span>vec[<span class="dv">6</span>:<span class="dv">10</span>]^(<span class="dv">1</span>-w))
+    <span class="kw">return</span>(pred)
+  }
+  for(i in <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">length.out=</span>iter)){
+    <span class="kw">print</span>(i)
+    w&lt;-i
+    pred &lt;-<span class="st"> </span><span class="kw">apply</span>(mat,<span class="dv">1</span>,f)
+    score &lt;-<span class="st"> </span><span class="kw">sum</span>(pred==label)/<span class="kw">length</span>(label)
+    result[<span class="dv">1</span>+i/(<span class="dv">1</span>/(iter<span class="dv">-1</span>)),] &lt;-<span class="st"> </span><span class="kw">c</span>(i,(<span class="dv">1</span>-i),score)
+  }
+  <span class="kw">return</span>(result[<span class="kw">order</span>(result[,<span class="dv">3</span>],<span class="dt">decreasing=</span><span class="ot">TRUE</span>),])
+}</code></pre>
+</div>
+<div id="cross-validation-function-example" class="section level3">
+<h3>Cross validation function example</h3>
+<p>Below is the code and output of our Random forest 5-fold cross validation function.</p>
+<pre class="sourceCode r"><code class="sourceCode r">cv.rf &lt;-<span class="st"> </span>function(train,<span class="dt">tree=</span><span class="dv">400</span>){
+
+  base::<span class="kw">library</span>(randomForest)
+
+  c &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">colnames</span>(train)==<span class="st">&quot;popularity&quot;</span>)
+
+    base::<span class="kw">library</span>(caret)
+    <span class="kw">set.seed</span>(<span class="dv">1234</span>)
+    flds &lt;-<span class="st"> </span><span class="kw">createFolds</span>(train$popularity,<span class="dt">k=</span><span class="dv">5</span>)
+    rfpred &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>,<span class="dv">5</span>)
+
+    for(j in <span class="dv">1</span>:<span class="dv">5</span>){
+      ktest &lt;-<span class="st"> </span>train[flds[[j]],]
+      ktrain &lt;-<span class="st"> </span>train[-flds[[j]],]
+
+      <span class="kw">print</span>(<span class="st">&quot;fold&quot;</span>)
+      <span class="kw">print</span>(j) <span class="co"># tracing progress</span>
+      <span class="kw">print</span>(rfpred)
+      <span class="kw">set.seed</span>(<span class="dv">1234</span>)
+      rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(ktrain[,-c], <span class="kw">as.factor</span>(ktrain$popularity), <span class="dt">ntree=</span>tree,
+                         <span class="dt">importance=</span><span class="ot">TRUE</span>, <span class="dt">do.trace=</span><span class="ot">TRUE</span>)
+
+      predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(rf,ktest[,-c])
+      rfsum &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(predictions, ktest$popularity)
+      rfpred[j] &lt;-<span class="st"> </span>rfsum$overall[<span class="dv">1</span>]
+      <span class="kw">print</span>(rfsum)
+
+      } <span class="co"># end of looping cross validations</span>
+      avg &lt;-<span class="st"> </span><span class="kw">mean</span>(rfpred)
+
+      <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">vec=</span>rfpred,<span class="dt">avg=</span>avg))
+
+} <span class="co"># end of cv.rf</span>
+
+cv &lt;-<span class="st"> </span><span class="kw">cv.rf</span>(<span class="dt">train =</span> train, <span class="dt">tree =</span> <span class="dv">30</span>)</code></pre>
+<pre><code>## [1] &quot;fold&quot;
+## [1] 1
+## [1] NA NA NA NA NA
+## ntree      OOB      1      2      3      4      5
+##     1:  67.65% 58.40% 62.01% 83.82%100.00% 88.89%
+##     2:  66.30% 60.50% 59.07% 84.16% 91.67% 78.57%
+##     3:  65.36% 60.83% 55.46% 83.90% 93.22% 95.65%
+##     4:  65.96% 61.85% 56.68% 85.38% 92.54% 84.62%
+##     5:  62.94% 62.46% 50.70% 82.84% 90.00% 90.00%
+##     6:  62.70% 62.37% 50.78% 80.14% 86.84% 96.97%
+##     7:  63.42% 64.17% 48.59% 84.25% 92.31%100.00%
+##     8:  61.21% 62.18% 46.14% 84.00% 87.34% 94.59%
+##     9:  61.14% 61.39% 45.44% 86.75% 89.87% 92.11%
+##    10:  61.31% 63.84% 44.42% 85.16% 89.87% 94.74%
+##    11:  61.27% 61.44% 44.96% 85.99% 91.14%100.00%
+##    12:  60.39% 61.13% 42.77% 84.91% 95.00%100.00%
+##    13:  59.12% 61.44% 40.59% 84.28% 92.50% 97.37%
+##    14:  58.27% 60.94% 39.54% 84.38% 90.00% 94.74%
+##    15:  58.68% 62.81% 38.62% 85.62% 91.25% 94.74%
+##    16:  59.24% 63.12% 38.62% 88.12% 95.00% 89.47%
+##    17:  58.63% 62.19% 37.50% 91.25% 92.50% 86.84%
+##    18:  59.74% 64.38% 38.54% 90.00% 92.50% 92.11%
+##    19:  59.55% 63.44% 37.71% 91.88% 93.75% 94.74%
+##    20:  58.16% 61.56% 37.08% 90.00% 92.50% 89.47%
+##    21:  59.18% 63.44% 37.50% 90.00% 92.50% 97.37%
+##    22:  57.88% 61.25% 36.46% 90.62% 92.50% 89.47%
+##    23:  58.07% 61.56% 35.83% 90.62% 95.00% 94.74%
+##    24:  57.88% 60.31% 36.88% 90.62% 93.75% 89.47%
+##    25:  58.07% 62.19% 36.46% 88.75% 93.75% 92.11%
+##    26:  57.61% 61.56% 35.21% 91.25% 93.75% 89.47%
+##    27:  57.51% 60.31% 35.00% 92.50% 93.75% 94.74%
+##    28:  58.07% 60.00% 36.25% 92.50% 95.00% 94.74%
+##    29:  58.16% 62.19% 35.00% 92.50% 95.00% 94.74%
+##    30:  58.53% 62.19% 35.62% 92.50% 95.00% 97.37%
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  1  2  3  4  5
+##          1 29 30 11  6  0
+##          2 48 81 27 10  7
+##          3  2  6  2  3  2
+##          4  1  2  0  1  0
+##          5  0  1  0  0  0
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.4201          
+##                  95% CI : (0.3604, 0.4815)
+##     No Information Rate : 0.4461          
+##     P-Value [Acc &gt; NIR] : 0.8211          
+##                                           
+##                   Kappa : 0.064           
+##  Mcnemar's Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: 1 Class: 2 Class: 3 Class: 4 Class: 5
+## Sensitivity            0.3625   0.6750 0.050000 0.050000 0.000000
+## Specificity            0.7513   0.3826 0.943231 0.987952 0.996154
+## Pos Pred Value         0.3816   0.4682 0.133333 0.250000 0.000000
+## Neg Pred Value         0.7358   0.5938 0.850394 0.928302 0.966418
+## Prevalence             0.2974   0.4461 0.148699 0.074349 0.033457
+## Detection Rate         0.1078   0.3011 0.007435 0.003717 0.000000
+## Detection Prevalence   0.2825   0.6431 0.055762 0.014870 0.003717
+## Balanced Accuracy      0.5569   0.5288 0.496616 0.518976 0.498077
+## [1] &quot;fold&quot;
+## [1] 2
+## [1] 0.4200743        NA        NA        NA        NA
+## ntree      OOB      1      2      3      4      5
+##     1:  61.50% 57.02% 50.89% 81.67% 92.59% 90.00%
+##     2:  63.31% 60.82% 52.25% 80.43% 92.45% 94.44%
+##     3:  62.91% 59.83% 50.28% 84.82% 90.91% 96.30%
+##     4:  64.07% 62.31% 49.88% 88.37% 92.96% 96.67%
+##     5:  64.58% 62.94% 51.75% 83.80% 95.89% 96.67%
+##     6:  63.71% 65.00% 48.65% 84.35% 93.51% 93.94%
+##     7:  64.13% 61.18% 52.52% 83.55% 93.67% 91.18%
+##     8:  61.13% 59.94% 47.30% 81.70% 92.41% 94.29%
+##     9:  61.94% 61.59% 47.54% 81.82% 96.20% 91.67%
+##    10:  60.09% 58.73% 45.86% 80.89% 92.50% 94.59%
+##    11:  60.02% 60.82% 42.83% 83.54% 96.25% 94.59%
+##    12:  61.62% 61.76% 44.65% 86.08% 98.75% 94.59%
+##    13:  60.28% 60.62% 43.42% 84.28% 96.25% 94.59%
+##    14:  59.94% 60.31% 42.08% 86.16% 97.50% 94.59%
+##    15:  59.42% 59.38% 42.50% 84.38% 95.00% 94.59%
+##    16:  60.07% 61.56% 42.29% 85.62% 93.75% 94.59%
+##    17:  59.70% 62.50% 40.62% 85.62% 95.00% 94.59%
+##    18:  59.61% 60.94% 40.83% 86.88% 96.25% 94.59%
+##    19:  60.63% 61.88% 41.46% 90.62% 93.75% 97.30%
+##    20:  59.42% 61.56% 38.96% 90.00% 95.00% 97.30%
+##    21:  59.89% 64.06% 38.54% 91.25% 91.25% 97.30%
+##    22:  59.89% 62.81% 39.17% 91.25% 92.50% 97.30%
+##    23:  58.59% 62.19% 37.50% 88.75% 93.75% 94.59%
+##    24:  59.05% 61.25% 38.54% 88.75% 96.25% 97.30%
+##    25:  58.22% 59.69% 36.88% 90.62% 97.50% 97.30%
+##    26:  57.75% 59.69% 35.42% 91.88% 97.50% 97.30%
+##    27:  58.96% 61.88% 36.88% 93.12% 93.75% 97.30%
+##    28:  59.80% 61.56% 38.54% 93.12% 96.25% 97.30%
+##    29:  58.68% 60.00% 37.71% 92.50% 95.00% 94.59%
+##    30:  57.94% 60.00% 35.83% 93.12% 95.00% 94.59%
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  1  2  3  4  5
+##          1 32 23  2  2  0
+##          2 44 92 34 17  7
+##          3  2  5  4  1  1
+##          4  2  0  0  0  0
+##          5  0  0  0  0  2
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.4815          
+##                  95% CI : (0.4205, 0.5429)
+##     No Information Rate : 0.4444          
+##     P-Value [Acc &gt; NIR] : 0.1224          
+##                                           
+##                   Kappa : 0.1471          
+##  Mcnemar's Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: 1 Class: 2 Class: 3 Class: 4 Class: 5
+## Sensitivity            0.4000   0.7667  0.10000 0.000000 0.200000
+## Specificity            0.8579   0.3200  0.96087 0.992000 1.000000
+## Pos Pred Value         0.5424   0.4742  0.30769 0.000000 1.000000
+## Neg Pred Value         0.7725   0.6316  0.85992 0.925373 0.970149
+## Prevalence             0.2963   0.4444  0.14815 0.074074 0.037037
+## Detection Rate         0.1185   0.3407  0.01481 0.000000 0.007407
+## Detection Prevalence   0.2185   0.7185  0.04815 0.007407 0.007407
+## Balanced Accuracy      0.6289   0.5433  0.53043 0.496000 0.600000
+## [1] &quot;fold&quot;
+## [1] 3
+## [1] 0.4200743 0.4814815        NA        NA        NA
+## ntree      OOB      1      2      3      4      5
+##     1:  67.40% 70.40% 56.42% 77.94% 92.59% 88.89%
+##     2:  68.97% 72.59% 57.14% 82.47% 92.50% 94.12%
+##     3:  66.29% 67.63% 55.10% 84.17% 85.71% 89.29%
+##     4:  68.53% 69.81% 56.51% 87.60% 91.67% 90.62%
+##     5:  68.27% 69.66% 55.81% 89.05% 91.04% 85.29%
+##     6:  67.74% 66.56% 54.85% 90.48% 94.29% 91.67%
+##     7:  65.21% 65.71% 51.42% 86.49% 90.79% 94.44%
+##     8:  65.87% 65.93% 52.16% 87.92% 93.51% 91.67%
+##     9:  65.28% 64.47% 50.75% 88.89% 96.20% 91.89%
+##    10:  64.60% 64.89% 48.73% 91.03% 92.50% 92.11%
+##    11:  63.74% 64.58% 47.79% 87.97% 93.75% 92.11%
+##    12:  63.40% 64.38% 46.74% 89.24% 95.00% 89.47%
+##    13:  62.85% 64.69% 45.70% 89.31% 92.50% 89.47%
+##    14:  61.77% 62.19% 44.56% 89.94% 92.50% 92.11%
+##    15:  61.87% 59.69% 45.62% 93.12% 95.00% 84.21%
+##    16:  60.85% 57.50% 45.00% 90.00% 95.00% 94.74%
+##    17:  61.97% 60.94% 44.17% 92.50% 95.00% 97.37%
+##    18:  61.87% 61.88% 44.17% 90.00% 97.50% 92.11%
+##    19:  60.30% 57.81% 43.54% 90.00% 96.25% 92.11%
+##    20:  59.37% 58.44% 41.04% 91.25% 93.75% 92.11%
+##    21:  59.18% 55.94% 41.04% 92.50% 96.25% 97.37%
+##    22:  60.95% 59.06% 43.33% 91.88% 95.00% 97.37%
+##    23:  59.37% 58.13% 40.21% 91.25% 97.50% 97.37%
+##    24:  58.44% 58.75% 38.12% 91.25% 97.50% 92.11%
+##    25:  58.26% 59.38% 38.33% 89.38% 96.25% 89.47%
+##    26:  58.35% 57.19% 37.92% 94.38% 96.25% 94.74%
+##    27:  58.16% 58.75% 37.08% 91.88% 97.50% 94.74%
+##    28:  59.74% 60.62% 39.17% 93.12% 96.25% 94.74%
+##    29:  57.61% 59.06% 35.00% 95.00% 96.25% 92.11%
+##    30:  57.98% 58.44% 36.88% 93.75% 95.00% 92.11%
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  1  2  3  4  5
+##          1 20 21 10  2  2
+##          2 55 96 27 17  4
+##          3  3  2  2  0  1
+##          4  1  1  0  0  2
+##          5  1  0  1  1  0
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.4387          
+##                  95% CI : (0.3785, 0.5002)
+##     No Information Rate : 0.4461          
+##     P-Value [Acc &gt; NIR] : 0.6196          
+##                                           
+##                   Kappa : 0.0695          
+##  Mcnemar's Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: 1 Class: 2 Class: 3 Class: 4 Class: 5
+## Sensitivity           0.25000   0.8000 0.050000  0.00000  0.00000
+## Specificity           0.81481   0.3087 0.973799  0.98394  0.98846
+## Pos Pred Value        0.36364   0.4824 0.250000  0.00000  0.00000
+## Neg Pred Value        0.71963   0.6571 0.854406  0.92453  0.96617
+## Prevalence            0.29740   0.4461 0.148699  0.07435  0.03346
+## Detection Rate        0.07435   0.3569 0.007435  0.00000  0.00000
+## Detection Prevalence  0.20446   0.7398 0.029740  0.01487  0.01115
+## Balanced Accuracy     0.53241   0.5544 0.511900  0.49197  0.49423
+## [1] &quot;fold&quot;
+## [1] 4
+## [1] 0.4200743 0.4814815 0.4386617        NA        NA
+## ntree      OOB      1      2      3      4      5
+##     1:  66.15% 61.16% 57.99% 88.33% 88.89% 70.00%
+##     2:  68.54% 61.73% 61.35% 88.54% 93.62% 83.33%
+##     3:  68.71% 65.38% 59.22% 87.20% 92.73% 88.89%
+##     4:  67.10% 65.09% 56.20% 86.76% 90.62% 93.75%
+##     5:  66.56% 65.52% 53.70% 87.07% 92.86% 96.97%
+##     6:  65.64% 59.60% 55.06% 88.00% 94.44% 97.14%
+##     7:  64.33% 60.84% 51.86% 88.00% 93.33% 94.29%
+##     8:  64.59% 60.51% 51.61% 90.85% 93.59% 94.29%
+##     9:  64.02% 60.57% 51.17% 88.31% 93.75% 91.67%
+##    10:  64.09% 62.78% 49.15% 89.74% 92.50% 97.22%
+##    11:  65.05% 63.64% 50.00% 91.82% 95.00% 91.67%
+##    12:  63.62% 63.44% 47.17% 91.19% 95.00% 91.67%
+##    13:  63.66% 62.19% 47.39% 94.38% 91.25% 94.59%
+##    14:  62.49% 60.94% 46.67% 90.62% 92.50% 94.59%
+##    15:  62.02% 62.50% 45.00% 92.50% 88.75% 89.19%
+##    16:  63.32% 64.69% 45.83% 91.88% 93.75% 89.19%
+##    17:  61.47% 63.44% 42.50% 91.25% 95.00% 89.19%
+##    18:  61.65% 62.50% 42.50% 92.50% 96.25% 94.59%
+##    19:  61.00% 63.12% 41.46% 91.88% 92.50% 94.59%
+##    20:  59.89% 63.75% 39.58% 90.62% 90.00% 91.89%
+##    21:  60.72% 61.88% 41.46% 91.88% 93.75% 94.59%
+##    22:  59.70% 60.31% 41.25% 91.25% 90.00% 91.89%
+##    23:  60.07% 62.81% 39.79% 93.12% 90.00% 91.89%
+##    24:  61.28% 64.06% 41.67% 93.12% 90.00% 91.89%
+##    25:  60.91% 63.75% 40.42% 95.00% 90.00% 91.89%
+##    26:  59.42% 62.19% 38.75% 93.12% 91.25% 89.19%
+##    27:  61.10% 61.25% 42.29% 95.00% 92.50% 89.19%
+##    28:  60.35% 63.12% 40.42% 92.50% 91.25% 89.19%
+##    29:  60.54% 64.06% 40.00% 91.88% 93.75% 89.19%
+##    30:  61.00% 65.31% 40.00% 92.50% 92.50% 91.89%
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  1  2  3  4  5
+##          1 24 27  2  6  0
+##          2 52 87 35  8  7
+##          3  4  3  3  2  3
+##          4  0  3  0  3  0
+##          5  0  0  0  1  0
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.4333          
+##                  95% CI : (0.3734, 0.4948)
+##     No Information Rate : 0.4444          
+##     P-Value [Acc &gt; NIR] : 0.6652          
+##                                           
+##                   Kappa : 0.0773          
+##  Mcnemar's Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: 1 Class: 2 Class: 3 Class: 4 Class: 5
+## Sensitivity           0.30000   0.7250  0.07500  0.15000 0.000000
+## Specificity           0.81579   0.3200  0.94783  0.98800 0.996154
+## Pos Pred Value        0.40678   0.4603  0.20000  0.50000 0.000000
+## Neg Pred Value        0.73460   0.5926  0.85490  0.93561 0.962825
+## Prevalence            0.29630   0.4444  0.14815  0.07407 0.037037
+## Detection Rate        0.08889   0.3222  0.01111  0.01111 0.000000
+## Detection Prevalence  0.21852   0.7000  0.05556  0.02222 0.003704
+## Balanced Accuracy     0.55789   0.5225  0.51141  0.56900 0.498077
+## [1] &quot;fold&quot;
+## [1] 5
+## [1] 0.4200743 0.4814815 0.4386617 0.4333333        NA
+## ntree      OOB      1      2      3      4      5
+##     1:  60.54% 56.00% 49.16% 88.24% 77.78% 88.89%
+##     2:  63.02% 58.25% 54.61% 82.29% 85.71% 88.24%
+##     3:  62.73% 60.08% 55.59% 75.83% 83.33% 79.17%
+##     4:  63.10% 60.22% 52.12% 83.21% 87.88% 93.33%
+##     5:  61.86% 58.33% 52.76% 80.00% 86.96% 87.10%
+##     6:  63.48% 58.78% 54.70% 82.52% 87.84% 88.57%
+##     7:  63.26% 58.84% 53.90% 80.00% 90.91% 91.89%
+##     8:  62.57% 61.71% 50.00% 81.46% 92.31% 89.19%
+##     9:  62.04% 59.62% 48.94% 83.12% 94.94% 91.89%
+##    10:  62.73% 61.01% 48.63% 86.71% 93.75% 89.19%
+##    11:  61.25% 60.31% 46.01% 85.44% 93.75% 91.89%
+##    12:  61.36% 62.19% 44.56% 87.34% 95.00% 86.84%
+##    13:  59.44% 59.69% 44.35% 82.39% 90.00% 86.84%
+##    14:  60.09% 60.94% 43.10% 86.79% 91.25% 89.47%
+##    15:  59.80% 63.12% 41.46% 85.53% 88.75% 94.74%
+##    16:  61.56% 64.69% 42.29% 89.94% 93.75% 92.11%
+##    17:  61.19% 61.56% 43.54% 90.57% 93.75% 89.47%
+##    18:  60.67% 61.25% 42.71% 90.00% 91.25% 94.74%
+##    19:  59.93% 61.88% 40.00% 91.88% 91.25% 94.74%
+##    20:  60.39% 63.12% 39.79% 92.50% 92.50% 94.74%
+##    21:  60.39% 62.50% 41.04% 90.62% 91.25% 94.74%
+##    22:  59.18% 60.62% 39.38% 91.25% 93.75% 89.47%
+##    23:  59.74% 61.88% 39.79% 90.62% 93.75% 92.11%
+##    24:  60.11% 62.50% 39.79% 90.62% 96.25% 92.11%
+##    25:  59.55% 60.31% 40.21% 91.25% 95.00% 89.47%
+##    26:  58.44% 59.69% 37.92% 91.88% 95.00% 89.47%
+##    27:  59.65% 61.56% 38.96% 93.75% 92.50% 92.11%
+##    28:  59.74% 60.94% 40.21% 91.25% 95.00% 89.47%
+##    29:  59.09% 60.31% 39.38% 91.88% 91.25% 92.11%
+##    30:  60.11% 62.50% 39.79% 92.50% 93.75% 89.47%
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  1  2  3  4  5
+##          1 26 34  9  5  0
+##          2 49 79 29 15  6
+##          3  3  5  1  0  1
+##          4  2  2  1  0  0
+##          5  0  0  0  0  2
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.4015          
+##                  95% CI : (0.3424, 0.4627)
+##     No Information Rate : 0.4461          
+##     P-Value [Acc &gt; NIR] : 0.9378          
+##                                           
+##                   Kappa : 0.0281          
+##  Mcnemar's Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: 1 Class: 2 Class: 3 Class: 4 Class: 5
+## Sensitivity           0.32500   0.6583 0.025000  0.00000 0.222222
+## Specificity           0.74603   0.3356 0.960699  0.97992 1.000000
+## Pos Pred Value        0.35135   0.4438 0.100000  0.00000 1.000000
+## Neg Pred Value        0.72308   0.5495 0.849421  0.92424 0.973783
+## Prevalence            0.29740   0.4461 0.148699  0.07435 0.033457
+## Detection Rate        0.09665   0.2937 0.003717  0.00000 0.007435
+## Detection Prevalence  0.27509   0.6617 0.037175  0.01859 0.007435
+## Balanced Accuracy     0.53552   0.4970 0.492849  0.48996 0.611111</code></pre>
+<p>The output is accuracy per fold and average accuracy of all 5 folds.</p>
+<pre class="sourceCode r"><code class="sourceCode r">cv</code></pre>
+<pre><code>## $vec
+## [1] 0.4200743 0.4814815 0.4386617 0.4333333 0.4014870
+## 
+## $avg
+## [1] 0.4350076</code></pre>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

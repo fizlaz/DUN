@@ -3,9 +3,7 @@ Title: Team DUN Kaggle milestone
 Version: 0.0.0.9000
 Author: Domagoj Fizulic <d.fizulic@gmail.com>, Uwe Honig, Niti Mishra
 Maintainer: Domagoj Fizulic <d.fizulic@gmail.com>
-Description: To reproduce our current submissions please run full.rf and full.xgb.
-	These functions will automatically return and save submissions in the appropriate
-	.csv format.
+Description: This package contains the functions our team created for in-class Kaggle competition "Predicting online news popularity". Refer to the vignette for complete instructions.
 Depends:
     R (>= 3.2.1)
 Suggests: knitr

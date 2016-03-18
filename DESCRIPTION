@@ -6,8 +6,8 @@ Maintainer: Domagoj Fizulic <d.fizulic@gmail.com>
 Description: This package contains the functions our team created for in-class Kaggle competition "Predicting online news popularity". Refer to the vignette for complete instructions.
 Depends:
     R (>= 3.2.1)
-Suggests: knitr
-VignetteBuilder: knitr
+Suggests: R.rsp
+VignetteBuilder: R.rsp
 License: see LICENSE
 LazyData: true
 Type: Package
