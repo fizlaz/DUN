@@ -1,0 +1,319 @@
+---
+title: "Vignette - Team DUN"
+author: "Dom, Uwe, Niti"
+date: "March 18, 2016"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{DUN Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## 1 Introduction
+In this vignette we  present a detailed description of the methods used for the in-class Kaggle Online News Popularity competition. 
+Our final model is based on a popular multi-layer approach, inspired by the winners Gilberto Titericz & Stanislav Semenov of the Otto Group Product Classification challenge on Kaggle. The solution is based on a two-fold approach: Feature engineering and Machine Learning techniques. The latter consists of a 3-layer learning architecture as shown in the picture below. The result on the private Kaggle scoreboard was 52.83% accuracy.
+
+In the first layer we used five folds to create metafeatures using 4 different classifiers. The metafeatures for the test set were created by using all available training data. After a thorough investigation of different types of classifiers for the first level we decided to stick with the following list:
+
+- Random Forest (1000 trees, probability output)
+- Xgboost (250 rounds, softprob, optimised using grid search in caret package)
+- AdaBoost (250 rounds, maboost package)
+- Multinomial logistic regression (glmnet package)
+
+In the second layer we again optimize parameters of Xgboost using only metafeatures created in the first layer. We do the same for h2o Neural Net. Both models are then trained using the optimal parameters and with the softprob output.
+
+In the third layer we use arithmetic/geometric averaging to combine Xgboost and Neural Networks to produce the final classification.
+
+## 2 Load data
+```{r}
+trainfull <- read.csv("news_popularity_training.csv", stringsAsFactors=FALSE)
+test  <- read.csv("news_popularity_test.csv",  stringsAsFactors=FALSE)
+```
+
+Store the test set id column as it is needed later for creating the submission file.
+```{r}
+idcol <- test[,1]
+```
+
+Remove id and url columns.
+```{r}
+trainfull <- trainfull[,-c(1,2)]
+test <- test[,-c(1,2)]
+```
+
+Transform target variable into a factor.
+```{r}
+trainfull$popularity <- as.factor(trainfull$popularity)
+```
+
+Label frequency of full train set:
+```{r}
+round(table(trainfull$popularity)/nrow(trainfull),3)
+```
+
+As mentioned above we will subsample just 1347 rows from the trainset. Due to this small sample size, we increase the proportion of label 4 and 5 to ensure proper functionality of the models used later. As a matter of fact, having too few labels of one kind could create problems in the cross validation part.
+```{r, message=FALSE}
+library(dplyr)
+set.seed(2949)
+a1 <- sample_n(filter(trainfull,popularity==1), size=400)
+a2 <- sample_n(filter(trainfull,popularity==2), size=600)
+a3 <- sample_n(filter(trainfull,popularity==3), size=200)
+a4 <- sample_n(filter(trainfull,popularity==4), size=100)
+a5 <- sample_n(filter(trainfull,popularity==5), size=47)
+train <- rbind(a1,a2,a3,a4,a5)
+```
+
+
+```{r}
+round(table(train$popularity)/nrow(train),3)
+```
+
+## 3 Creating metafeatures for layer 1
+
+### Random Forest layer 1
+Next, we run random forest and create first set of metafeatures. Our function splits data into 5 folds, trains on 4 and predicts on 1. We used 1000 trees per fold on the full trainset.
+```{r, message=FALSE, warning=FALSE}
+rfmetatrain <- DUN::fmeta.rf(train, trees = 30, verbose = FALSE)
+rfmetatest <- DUN::fmeta.rf(train,test = test,trees = 30, verbose = FALSE)
+```
+
+Head:
+```{r}
+head(rfmetatrain)
+head(rfmetatest)
+```
+
+Notice that the sixth column is the predicted label. This will not be used as a metafeature later on.
+```{r}
+rfmetatrain <- rfmetatrain[,1:5]
+rfmetatest <- rfmetatest[,1:5]
+```
+
+### Xgboost layer 1
+Now create meta features with Xgboost. These are created on the same five folds. Xgboost parameters were optimised using caret package grid search. Please refer to the vignette appendix.
+```{r, message=FALSE}
+xgmetatrain <- DUN::fmeta.xgb(train,nrounds = 30, verbose = 0)
+xgmetatest <- DUN::fmeta.xgb(train, test = test, nrounds = 30, verbose = 0)
+```
+
+Print head:
+```{r}
+head(xgmetatrain)
+head(xgmetatest)
+```
+
+### maboost(AdaBoost) layer 1
+Next create metafeatures on same folds with AdaBoost. We use maboost package which enables multiclass AdaBoost.
+```{r, message=FALSE}
+mabmetatrain <- DUN::fmeta.mab(train,rounds = 30)
+mabmetatest <- DUN::fmeta.mab(train,test = test, rounds = 30)
+```
+
+Print head:
+```{r}
+head(mabmetatrain)
+head(mabmetatest)
+```
+
+The first 5 columns are probability class estimates. Columns 6:10 are ensamble averages produced by selecting type= "F" in predict.maboost. These have 0.99 correlation with class probabilites and we use only columns 1:5 further on.
+```{r}
+mabmetatrain <- mabmetatrain[,1:5]
+mabmetatest <- mabmetatest[,1:5]
+```
+
+### Multinomial Logistic layer 1
+Next we create metafeatures with multinomial logistic regression. We use glmnet package.
+```{r,eval=TRUE, warning=FALSE, message=FALSE}
+glmmetatrain <- DUN::fmeta.glm(train)
+glmmetatest <- DUN::fmeta.glm(train,test = test)
+```
+
+Print head:
+```{r,eval=TRUE}
+head(glmmetatrain)
+head(glmmetatest)
+```
+
+## 4 Training layer 2 models
+
+First combine metafeatures from the first layer which are used for training models in the second layer.
+```{r}
+metatrain2 <- data.frame(train$popularity,rfmetatrain,xgmetatrain,mabmetatrain)
+names(metatrain2)[1]<-"popularity"
+metatest2 <- data.frame(rfmetatest,xgmetatest,mabmetatest)
+```
+
+### Xgboost layer 2
+
+```{r}
+library(xgboost)
+
+param <- list("objective"="multi:softprob",
+              "eval_metric"="merror",
+              "num_class"=5,
+              "booster"="gbtree",
+              "eta"=0.01,
+              "max_depth"=6,
+              "subsample"=0.8,
+              "colsample_bytree"=0.6)
+
+y<-as.integer(metatrain2$popularity)-1
+
+bst <- xgboost(params = param, data = as.matrix(metatrain2[,-1]),label = y,
+               nrounds = 30, verbose = 0)
+
+preds <- predict(bst,as.matrix(metatest2))
+xgbprob <- matrix(preds,ncol=5,byrow=TRUE)
+```
+
+### h2o Neural networks layer 2
+
+```{r, message=FALSE}
+library(h2o)
+localH2O = h2o.init(nthreads=-1)
+
+data_train_h <- as.h2o(metatrain2,destination_frame = "h2o_data_train")
+data_test_h <- as.h2o(metatest2,destination_frame = "h2o_data_test")
+
+y <- "popularity"
+x <- setdiff(names(data_train_h), y)
+
+data_train_h[,y] <- as.factor(data_train_h[,y])
+
+model <- h2o.deeplearning(x = x,
+                          y = y,
+                          training_frame = data_train_h,
+                          #validation_frame = data_test_h,
+                          distribution = "multinomial",
+                          activation = "RectifierWithDropout",
+                          hidden = c(20,20),
+                          input_dropout_ratio = 0.2,
+                          l1 = 1e-7,
+                          epochs = 10)
+
+#
+pred <- h2o.predict(model, newdata = data_test_h)
+nnprob <- as.matrix(pred[,2:6])
+
+h2o.shutdown()
+```
+
+## 5 Third and final layer
+In this layer we perform arithmetic and geometric averaging of second layer model predictions.
+
+Head of 2nd layer probability class estimates.
+```{r}
+head(xgbprob)
+head(nnprob)
+```
+
+### Arithmetic average
+Optimal weights were computed using the avg.arit function found in the appendix.
+```{r}
+arit <- function(vec){
+  pred <- which.max(vec[1:5]*(0.76) + vec[6:10]*(0.24))
+  return(pred)
+}
+
+combined <- cbind(xgbprob,nnprob)
+finallabelsarit <- apply(combined,1,arit)
+head(finallabelsarit)
+```
+
+### Geometric average
+Optimal weights were computed using the avg.geom function found in the appendix.
+```{r}
+geom <- function(vec){
+  pred <- which.max(vec[1:5]^(0.76) * vec[6:10]^(0.24))
+  return(pred)
+}
+
+combined <- cbind(xgbprob,nnprob)
+finallabelsgeom <- apply(combined,1,geom)
+head(finallabelsgeom)
+```
+
+### Creating submission files
+```{r, eval=FALSE}
+submissionarit <- data.frame(id = idcol)
+submissionarit$popularity <- finallabelsarit
+write.csv(submissionarit, file = "arithmetic_r_gsenews.csv", row.names=FALSE)
+
+submissiongeom <- data.frame(id = idcol)
+submissiongeom$popularity <- finallabelsgeom
+write.csv(submissiongeom, file = "geometric_r_gsenews.csv", row.names=FALSE)
+```
+
+## 6 Appendix
+
+### Optimising Xgboost
+Below code is not executed for this document as it takes some time to run. On the full train set it can easily run for more than 3 hours.
+```{r, eval=FALSE}
+library(caret)
+library(xgboost)
+library(readr)
+library(dplyr)
+library(tidyr)
+
+df_train <- train
+
+# set up the cross-validated hyper-parameter search
+xgb_grid_1 = expand.grid(
+  nrounds = c(150,200,250,300),
+  eta = c(0.03, 0.01, 0.001),
+  max_depth = c(2, 4, 6),
+  gamma = c(0,1),
+  colsample_bytree = c(0.6, 0.8, 1),    #default=1
+  min_child_weight = 1     #default=1
+)
+
+
+# pack the training control parameters
+xgb_trcontrol_1 = trainControl(
+  method = "cv",
+  number = 5,
+  verboseIter = TRUE,
+  returnData = FALSE,
+  returnResamp = "all",                       # save losses across all models
+  classProbs = TRUE,                     # set to TRUE for AUC to be computed
+  #summaryFunction = twoClassSummary,
+  summaryFunction = defaultSummary,
+  allowParallel = TRUE
+)
+
+z <- unlist(lapply("Label", paste0, df_train$popularity ))
+
+xgb_train_1 = train(
+  x = as.matrix(df_train %>%
+                  select(-popularity)),
+  y = as.factor(z),
+  trControl = xgb_trcontrol_1,
+  tuneGrid = xgb_grid_1,
+  method = "xgbTree"
+)
+```
+
+### Arithmetic and Geometric averaging
+
+Arithmetic averaging
+```{r}
+arithmeticaverage <- DUN::avg.arit(xgmetatrain,rfmetatrain, label = train$popularity, iter = 11)
+arithmeticaverage
+```
+
+Geometric averaging
+```{r}
+geometricaverage <- DUN::avg.geom(xgmetatrain,rfmetatrain,label = train$popularity, iter = 11)
+geometricaverage
+```
+
+### Cross validation function example
+Below is the example of our Random forest 5-fold cross validation function.
+```{r}
+cv <- DUN::cv.rf(train = train, tree = 30)
+```
+
+The output is accuracy per fold and average accuracy of all 5 folds.
+```{r}
+cv
+```

@@ -7,13 +7,12 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="author" content="Dom, Uwe, Niti" />
 
-<meta name="date" content="2016-01-01" />
+<meta name="date" content="2016-03-18" />
 
-<title>DUN Vignette</title>
+<title>Vignette - Team DUN</title>
 
 
 
@@ -37,9 +36,14 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #06287e; }
 code > span.er { color: #ff0000; font-weight: bold; }
 </style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 
 
-<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%7D%0Apre%20%7B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -47,20 +51,17 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 
 
-<div class="fluid-row" id="header">
-
-
-<h1 class="title">DUN Vignette</h1>
+<div id="header">
+<h1 class="title">Vignette - Team DUN</h1>
 <h4 class="author"><em>Dom, Uwe, Niti</em></h4>
-<h4 class="date"><em>2016</em></h4>
-
+<h4 class="date"><em>March 18, 2016</em></h4>
 </div>
 
 
 <div id="introduction" class="section level2">
 <h2>1 Introduction</h2>
-<p>This vignete will show our exact methods used for in-class Kaggle Online news popularity competition. The raw data is split into 30,000 * 62 training set and 9,644 * 61 test set. This vignette will use a subsample of these sets.</p>
-<p>Our final model is based on a quite popular multi-layered approach. In the first layer we used fixed five folds to create metafeatures using 4 different classifiers. Metafeatures for the test set were created by training on the full train set. We considered several different classifiers for the first level and in the end kept the following:</p>
+<p>In this vignette we present a detailed description of the methods used for the in-class Kaggle Online News Popularity competition. Our final model is based on a popular multi-layer approach, inspired by the winners Gilberto Titericz &amp; Stanislav Semenov of the Otto Group Product Classification challenge on Kaggle. The solution is based on a two-fold approach: Feature engineering and Machine Learning techniques. The latter consists of a 3-layer learning architecture as shown in the picture below. The result on the private Kaggle scoreboard was 52.83% accuracy.</p>
+<p>In the first layer we used five folds to create metafeatures using 4 different classifiers. The metafeatures for the test set were created by using all available training data. After a thorough investigation of different types of classifiers for the first level we decided to stick with the following list:</p>
 <ul>
 <li>Random Forest (1000 trees, probability output)</li>
 <li>Xgboost (250 rounds, softprob, optimised using grid search in caret package)</li>
@@ -74,7 +75,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h2>2 Load data</h2>
 <pre class="sourceCode r"><code class="sourceCode r">trainfull &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;news_popularity_training.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
 test  &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;news_popularity_test.csv&quot;</span>,  <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</code></pre>
-<p>Store test set id column needed later for creating the submission file.</p>
+<p>Store the test set id column as it is needed later for creating the submission file.</p>
 <pre class="sourceCode r"><code class="sourceCode r">idcol &lt;-<span class="st"> </span>test[,<span class="dv">1</span>]</code></pre>
 <p>Remove id and url columns.</p>
 <pre class="sourceCode r"><code class="sourceCode r">trainfull &lt;-<span class="st"> </span>trainfull[,-<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]
@@ -82,55 +83,32 @@ test &lt;-<span class="st"> </span>test[,-<span class="kw">c</span>(<span class=
 <p>Transform target variable into a factor.</p>
 <pre class="sourceCode r"><code class="sourceCode r">trainfull$popularity &lt;-<span class="st"> </span><span class="kw">as.factor</span>(trainfull$popularity)</code></pre>
 <p>Label frequency of full train set:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">table</span>(trainfull$popularity)/<span class="kw">nrow</span>(trainfull))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">table</span>(trainfull$popularity)/<span class="kw">nrow</span>(trainfull),<span class="dv">3</span>)</code></pre>
 <pre><code>## 
-## 1 2 3 4 5 
-## 0 0 0 0 0</code></pre>
-<p>For the purpose of this vignette we will subsample 1347 rows from the trainset.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2949</span>)
+##     1     2     3     4     5 
+## 0.316 0.459 0.190 0.033 0.002</code></pre>
+<p>As mentioned above we will subsample just 1347 rows from the trainset. Due to this small sample size, we increase the proportion of label 4 and 5 to ensure proper functionality of the models used later. As a matter of fact, having too few labels of one kind could create problems in the cross validation part.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">set.seed</span>(<span class="dv">2949</span>)
 a1 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="kw">filter</span>(trainfull,popularity==<span class="dv">1</span>), <span class="dt">size=</span><span class="dv">400</span>)
 a2 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="kw">filter</span>(trainfull,popularity==<span class="dv">2</span>), <span class="dt">size=</span><span class="dv">600</span>)
 a3 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="kw">filter</span>(trainfull,popularity==<span class="dv">3</span>), <span class="dt">size=</span><span class="dv">200</span>)
 a4 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="kw">filter</span>(trainfull,popularity==<span class="dv">4</span>), <span class="dt">size=</span><span class="dv">100</span>)
 a5 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="kw">filter</span>(trainfull,popularity==<span class="dv">5</span>), <span class="dt">size=</span><span class="dv">47</span>)
 train &lt;-<span class="st"> </span><span class="kw">rbind</span>(a1,a2,a3,a4,a5)</code></pre>
-<p>For these examples we increase ratios for class label 4 and 5 in order to keep the set smaller and all of our models working.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">table</span>(train$popularity)/<span class="kw">nrow</span>(train))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">table</span>(train$popularity)/<span class="kw">nrow</span>(train),<span class="dv">3</span>)</code></pre>
 <pre><code>## 
-## 1 2 3 4 5 
-## 0 0 0 0 0</code></pre>
+##     1     2     3     4     5 
+## 0.297 0.445 0.148 0.074 0.035</code></pre>
 </div>
 <div id="creating-metafeatures-for-layer-1" class="section level2">
 <h2>3 Creating metafeatures for layer 1</h2>
 <div id="random-forest-layer-1" class="section level3">
 <h3>Random Forest layer 1</h3>
-<p>Next we run random forest and create first set of metafeatures. Our function splits data into 5 folds, trains on 4 and predicts on 1. We used 1000 trees per fold on the full trainset.</p>
+<p>Next, we run random forest and create first set of metafeatures. Our function splits data into 5 folds, trains on 4 and predicts on 1. We used 1000 trees per fold on the full trainset.</p>
 <pre class="sourceCode r"><code class="sourceCode r">rfmetatrain &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.rf</span>(train, <span class="dt">trees =</span> <span class="dv">30</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-<pre><code>## randomForest 4.6-12</code></pre>
-<pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
-<pre><code>## 
-## Attaching package: 'randomForest'</code></pre>
-<pre><code>## The following object is masked from 'package:dplyr':
-## 
-##     combine</code></pre>
-<pre><code>## [1] &quot;No test set, cross validating train set.&quot;</code></pre>
-<pre><code>## Loading required package: lattice</code></pre>
-<pre><code>## Loading required package: ggplot2</code></pre>
-<pre><code>## 
-## Attaching package: 'ggplot2'</code></pre>
-<pre><code>## The following object is masked from 'package:randomForest':
-## 
-##     margin</code></pre>
-<pre><code>## [1] &quot;fold&quot;
+<pre><code>## [1] &quot;No test set, cross validating train set.&quot;
+## [1] &quot;fold&quot;
 ## [1] 1
 ## [1] &quot;fold&quot;
 ## [1] 2
@@ -159,19 +137,14 @@ train &lt;-<span class="st"> </span><span class="kw">rbind</span>(a1,a2,a3,a4,a5
 ## 4 0.6666667 0.3000000 0.03333333 0.00000000 0.00000000       1
 ## 5 0.3666667 0.5000000 0.10000000 0.03333333 0.00000000       2
 ## 6 0.1333333 0.4000000 0.30000000 0.03333333 0.13333333       2</code></pre>
-<p>Notice that the sixth column is predicted label. This will not be used as a metafeature later on.</p>
+<p>Notice that the sixth column is the predicted label. This will not be used as a metafeature later on.</p>
 <pre class="sourceCode r"><code class="sourceCode r">rfmetatrain &lt;-<span class="st"> </span>rfmetatrain[,<span class="dv">1</span>:<span class="dv">5</span>]
 rfmetatest &lt;-<span class="st"> </span>rfmetatest[,<span class="dv">1</span>:<span class="dv">5</span>]</code></pre>
 </div>
 <div id="xgboost-layer-1" class="section level3">
 <h3>Xgboost layer 1</h3>
-<p>Now create meta features with Xgboost. These are created on same fixed five folds. Xgboost parameters were optimised using caret package grid search. Please refer to the vignette appendix.</p>
+<p>Now create meta features with Xgboost. These are created on the same five folds. Xgboost parameters were optimised using caret package grid search. Please refer to the vignette appendix.</p>
 <pre class="sourceCode r"><code class="sourceCode r">xgmetatrain &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.xgb</span>(train,<span class="dt">nrounds =</span> <span class="dv">30</span>, <span class="dt">verbose =</span> <span class="dv">0</span>)</code></pre>
-<pre><code>## 
-## Attaching package: 'xgboost'</code></pre>
-<pre><code>## The following object is masked from 'package:dplyr':
-## 
-##     slice</code></pre>
 <pre><code>## [1] &quot;No test set, cross validating train set.&quot;
 ## [1] &quot;fold&quot;
 ## [1] 1
@@ -208,8 +181,6 @@ rfmetatest &lt;-<span class="st"> </span>rfmetatest[,<span class="dv">1</span>:<
 <h3>maboost(AdaBoost) layer 1</h3>
 <p>Next create metafeatures on same folds with AdaBoost. We use maboost package which enables multiclass AdaBoost.</p>
 <pre class="sourceCode r"><code class="sourceCode r">mabmetatrain &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.mab</span>(train,<span class="dt">rounds =</span> <span class="dv">30</span>)</code></pre>
-<pre><code>## Loading required package: rpart</code></pre>
-<pre><code>## Loading required package: C50</code></pre>
 <pre><code>## [1] &quot;No test set, cross validating train set.&quot;
 ## [1] &quot;fold&quot;
 ## [1] 1
@@ -260,17 +231,14 @@ rfmetatest &lt;-<span class="st"> </span>rfmetatest[,<span class="dv">1</span>:<
 ## 4 0.0002702567 1.619741e-05 0.000000e+00     0
 ## 5 0.0004066520 6.918795e-05 1.619741e-05     0
 ## 6 0.0002974951 2.543979e-04 1.769114e-04     0</code></pre>
-<p>First 5 columns are probability class estimates. Columns 6:10 are ensamble averages produces by selecting type=“F” in predict.maboost. These have 0.99 correlation with class probabilites and we use only columns 1:5 further on.</p>
+<p>The first 5 columns are probability class estimates. Columns 6:10 are ensamble averages produced by selecting type= “F” in predict.maboost. These have 0.99 correlation with class probabilites and we use only columns 1:5 further on.</p>
 <pre class="sourceCode r"><code class="sourceCode r">mabmetatrain &lt;-<span class="st"> </span>mabmetatrain[,<span class="dv">1</span>:<span class="dv">5</span>]
 mabmetatest &lt;-<span class="st"> </span>mabmetatest[,<span class="dv">1</span>:<span class="dv">5</span>]</code></pre>
 </div>
 <div id="multinomial-logistic-layer-1" class="section level3">
 <h3>Multinomial Logistic layer 1</h3>
-<p>Next we create metafeatures wiht multinomial logistic regression. We use glmnet package.</p>
+<p>Next we create metafeatures with multinomial logistic regression. We use glmnet package.</p>
 <pre class="sourceCode r"><code class="sourceCode r">glmmetatrain &lt;-<span class="st"> </span>DUN::<span class="kw">fmeta.glm</span>(train)</code></pre>
-<pre><code>## Loading required package: Matrix</code></pre>
-<pre><code>## Loading required package: foreach</code></pre>
-<pre><code>## Loaded glmnet 2.0-4</code></pre>
 <pre><code>## [1] &quot;No test set, cross validating train set.&quot;
 ## [1] &quot;fold&quot;
 ## [1] 1
@@ -306,9 +274,9 @@ mabmetatest &lt;-<span class="st"> </span>mabmetatest[,<span class="dv">1</span>
 <div id="training-layer-2-models" class="section level2">
 <h2>4 Training layer 2 models</h2>
 <p>First combine metafeatures from the first layer which are used for training models in the second layer.</p>
-<pre class="sourceCode r"><code class="sourceCode r">metatrain2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(train$popularity,rfmetatrain,xgmetatrain,mabmetatrain, glmmetatrain)
+<pre class="sourceCode r"><code class="sourceCode r">metatrain2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(train$popularity,rfmetatrain,xgmetatrain,mabmetatrain)
 <span class="kw">names</span>(metatrain2)[<span class="dv">1</span>]&lt;-<span class="st">&quot;popularity&quot;</span>
-metatest2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(rfmetatest,xgmetatest,mabmetatest,glmmetatest)</code></pre>
+metatest2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(rfmetatest,xgmetatest,mabmetatest)</code></pre>
 <div id="xgboost-layer-2" class="section level3">
 <h3>Xgboost layer 2</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xgboost)
@@ -332,42 +300,31 @@ xgbprob &lt;-<span class="st"> </span><span class="kw">matrix</span>(preds,<span
 </div>
 <div id="h2o-neural-networks-layer-2" class="section level3">
 <h3>h2o Neural networks layer 2</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(h2o)</code></pre>
-<pre><code>## Loading required package: statmod</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(h2o)
+localH2O =<span class="st"> </span><span class="kw">h2o.init</span>(<span class="dt">nthreads=</span>-<span class="dv">1</span>)</code></pre>
 <pre><code>## 
-## ----------------------------------------------------------------------
+## H2O is not running yet, starting it now...
 ## 
-## Your next step is to start H2O:
-##     &gt; h2o.init()
+## Note:  In case of errors look at the following log files:
+##     /var/folders/7x/9xd00gzx2h973_8dzyl2w22w0000gn/T//Rtmp5o8MrM/h2o_uhoenig_started_from_r.out
+##     /var/folders/7x/9xd00gzx2h973_8dzyl2w22w0000gn/T//Rtmp5o8MrM/h2o_uhoenig_started_from_r.err
 ## 
-## For H2O package documentation, ask for help:
-##     &gt; ??h2o
 ## 
-## After starting H2O, you can use the Web UI at http://localhost:54321
-## For more information visit http://docs.h2o.ai
-## 
-## ----------------------------------------------------------------------</code></pre>
-<pre><code>## 
-## Attaching package: 'h2o'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     sd, var</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     %*%, apply, as.factor, as.numeric, colnames, colnames&lt;-,
-##     ifelse, %in%, is.factor, is.numeric, log, trunc</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">localH2O =<span class="st"> </span><span class="kw">h2o.init</span>(<span class="dt">nthreads=</span>-<span class="dv">1</span>)</code></pre>
-<pre><code>## Successfully connected to http://127.0.0.1:54321/ 
+## Starting H2O JVM and connecting: .. Connection successful!
 ## 
 ## R is connected to the H2O cluster: 
-##     H2O cluster uptime:         6 hours 42 minutes 
-##     H2O cluster version:        3.6.0.8 
-##     H2O cluster name:           H2O_started_from_R_fizlaz_ete054 
+##     H2O cluster uptime:         2 seconds 202 milliseconds 
+##     H2O cluster version:        3.8.1.3 
+##     H2O cluster name:           H2O_started_from_R_uhoenig_gmk639 
 ##     H2O cluster total nodes:    1 
-##     H2O cluster total memory:   1.71 GB 
+##     H2O cluster total memory:   0.12 GB 
 ##     H2O cluster total cores:    4 
 ##     H2O cluster allowed cores:  4 
-##     H2O cluster healthy:        TRUE</code></pre>
+##     H2O cluster healthy:        TRUE 
+##     H2O Connection ip:          localhost 
+##     H2O Connection port:        54321 
+##     H2O Connection proxy:       NA 
+##     R Version:                  R version 3.2.3 (2015-12-10)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">data_train_h &lt;-<span class="st"> </span><span class="kw">as.h2o</span>(metatrain2,<span class="dt">destination_frame =</span> <span class="st">&quot;h2o_data_train&quot;</span>)</code></pre>
 <pre><code>## 
   |                                                                       
@@ -399,15 +356,19 @@ model &lt;-<span class="st"> </span><span class="kw">h2o.deeplearning</span>(<sp
   |                                                                       
   |                                                                 |   0%
   |                                                                       
-  |======                                                           |  10%
-  |                                                                       
   |=================================================================| 100%</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
-pred &lt;-<span class="st"> </span><span class="kw">h2o.predict</span>(model, <span class="dt">newdata =</span> data_test_h)
-nnprob &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(pred[,<span class="dv">2</span>:<span class="dv">6</span>])
+pred &lt;-<span class="st"> </span><span class="kw">h2o.predict</span>(model, <span class="dt">newdata =</span> data_test_h)</code></pre>
+<pre><code>## 
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |=================================================================| 100%</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">nnprob &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(pred[,<span class="dv">2</span>:<span class="dv">6</span>])
 
 <span class="kw">h2o.shutdown</span>()</code></pre>
-<pre><code>## Are you sure you want to shutdown the H2O instance running at http://127.0.0.1:54321/ (Y/N)?</code></pre>
+<pre><code>## Are you sure you want to shutdown the H2O instance running at http://localhost:54321/ (Y/N)?</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
 <div id="third-and-final-layer" class="section level2">
@@ -416,20 +377,20 @@ nnprob &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(pred[,<sp
 <p>Head of 2nd layer probability class estimates.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(xgbprob)</code></pre>
 <pre><code>##           [,1]      [,2]      [,3]      [,4]      [,5]
-## [1,] 0.1988432 0.2752962 0.1830504 0.1733799 0.1694303
-## [2,] 0.2292054 0.2377290 0.1851720 0.1768383 0.1710552
-## [3,] 0.2106026 0.2211210 0.2000915 0.1918101 0.1763749
-## [4,] 0.2610941 0.2204228 0.1774678 0.1722736 0.1687417
-## [5,] 0.2579787 0.2309289 0.1725481 0.1687019 0.1698423
-## [6,] 0.1777316 0.2476686 0.2114745 0.1800035 0.1831217</code></pre>
+## [1,] 0.2392463 0.2378115 0.1831146 0.1710245 0.1688032
+## [2,] 0.2214223 0.2279395 0.2030976 0.1748551 0.1726855
+## [3,] 0.2029420 0.2325867 0.1967959 0.1941885 0.1734868
+## [4,] 0.2382281 0.2292276 0.1892001 0.1689848 0.1743594
+## [5,] 0.2598159 0.2264598 0.1823115 0.1666395 0.1647732
+## [6,] 0.1877049 0.2404355 0.2173201 0.1768157 0.1777239</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(nnprob)</code></pre>
-<pre><code>##             p1        p2        p3         p4          p5
-## [1,] 0.2798370 0.5202456 0.1326309 0.05261558 0.014671025
-## [2,] 0.3963710 0.4530530 0.1132324 0.02892675 0.008416854
-## [3,] 0.3102111 0.4291267 0.1715833 0.06453166 0.024547263
-## [4,] 0.5223214 0.3421381 0.1069968 0.02234457 0.006199176
-## [5,] 0.3602626 0.4624441 0.1314753 0.03687223 0.008945751
-## [6,] 0.2358269 0.4588042 0.2044729 0.07600203 0.024893918</code></pre>
+<pre><code>##             p1        p2        p3         p4         p5
+## [1,] 0.2114004 0.5726414 0.1349130 0.06650413 0.01454110
+## [2,] 0.2180391 0.5807086 0.1179882 0.06767628 0.01558795
+## [3,] 0.1941601 0.5791349 0.1289007 0.07806817 0.01973616
+## [4,] 0.2629637 0.5592995 0.1213695 0.04839260 0.00797477
+## [5,] 0.2443887 0.5807788 0.1122189 0.05001256 0.01260108
+## [6,] 0.1678766 0.5857713 0.1485553 0.06781762 0.02997917</code></pre>
 <div id="arithmetic-average" class="section level3">
 <h3>Arithmetic average</h3>
 <p>Optimal weights were computed using the avg.arit function found in the appendix.</p>
@@ -441,7 +402,7 @@ nnprob &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(pred[,<sp
 combined &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgbprob,nnprob)
 finallabelsarit &lt;-<span class="st"> </span><span class="kw">apply</span>(combined,<span class="dv">1</span>,arit)
 <span class="kw">head</span>(finallabelsarit)</code></pre>
-<pre><code>## [1] 2 2 2 1 2 2</code></pre>
+<pre><code>## [1] 2 2 2 2 2 2</code></pre>
 </div>
 <div id="geometric-average" class="section level3">
 <h3>Geometric average</h3>
@@ -454,7 +415,7 @@ finallabelsarit &lt;-<span class="st"> </span><span class="kw">apply</span>(comb
 combined &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgbprob,nnprob)
 finallabelsgeom &lt;-<span class="st"> </span><span class="kw">apply</span>(combined,<span class="dv">1</span>,geom)
 <span class="kw">head</span>(finallabelsgeom)</code></pre>
-<pre><code>## [1] 2 2 2 1 1 2</code></pre>
+<pre><code>## [1] 2 2 2 2 2 2</code></pre>
 </div>
 <div id="creating-submission-files" class="section level3">
 <h3>Creating submission files</h3>
