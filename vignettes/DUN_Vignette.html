@@ -306,9 +306,9 @@ mabmetatest &lt;-<span class="st"> </span>mabmetatest[,<span class="dv">1</span>
 <div id="training-layer-2-models" class="section level2">
 <h2>4 Training layer 2 models</h2>
 <p>First combine metafeatures from the first layer which are used for training models in the second layer.</p>
-<pre class="sourceCode r"><code class="sourceCode r">metatrain2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(train$popularity,rfmetatrain,xgmetatrain,mabmetatrain)
+<pre class="sourceCode r"><code class="sourceCode r">metatrain2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(train$popularity,rfmetatrain,xgmetatrain,mabmetatrain, glmmetatrain)
 <span class="kw">names</span>(metatrain2)[<span class="dv">1</span>]&lt;-<span class="st">&quot;popularity&quot;</span>
-metatest2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(rfmetatest,xgmetatest,mabmetatest)</code></pre>
+metatest2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(rfmetatest,xgmetatest,mabmetatest,glmmetatest)</code></pre>
 <div id="xgboost-layer-2" class="section level3">
 <h3>Xgboost layer 2</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xgboost)
@@ -360,7 +360,7 @@ xgbprob &lt;-<span class="st"> </span><span class="kw">matrix</span>(preds,<span
 <pre><code>## Successfully connected to http://127.0.0.1:54321/ 
 ## 
 ## R is connected to the H2O cluster: 
-##     H2O cluster uptime:         1 days 5 hours 
+##     H2O cluster uptime:         1 days 15 hours 
 ##     H2O cluster version:        3.6.0.8 
 ##     H2O cluster name:           H2O_started_from_R_fizlaz_lep468 
 ##     H2O cluster total nodes:    1 
@@ -399,7 +399,7 @@ model &lt;-<span class="st"> </span><span class="kw">h2o.deeplearning</span>(<sp
   |                                                                       
   |                                                                 |   0%
   |                                                                       
-  |======                                                           |  10%
+  |=============                                                    |  20%
   |                                                                       
   |=================================================================| 100%</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
@@ -416,22 +416,22 @@ nnprob &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(pred[,<sp
 <p>Head of 2nd layer probability class estimates.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(xgbprob)</code></pre>
 <pre><code>##           [,1]      [,2]      [,3]      [,4]      [,5]
-## [1,] 0.2392463 0.2378115 0.1831146 0.1710245 0.1688032
-## [2,] 0.2214223 0.2279395 0.2030976 0.1748551 0.1726855
-## [3,] 0.2029420 0.2325867 0.1967959 0.1941885 0.1734868
-## [4,] 0.2382281 0.2292276 0.1892001 0.1689848 0.1743594
-## [5,] 0.2598159 0.2264598 0.1823115 0.1666395 0.1647732
-## [6,] 0.1877049 0.2404355 0.2173201 0.1768156 0.1777239</code></pre>
+## [1,] 0.1988432 0.2752962 0.1830504 0.1733799 0.1694303
+## [2,] 0.2292054 0.2377290 0.1851720 0.1768383 0.1710552
+## [3,] 0.2106026 0.2211210 0.2000915 0.1918101 0.1763749
+## [4,] 0.2610941 0.2204228 0.1774678 0.1722736 0.1687417
+## [5,] 0.2579787 0.2309289 0.1725481 0.1687019 0.1698423
+## [6,] 0.1777316 0.2476686 0.2114745 0.1800035 0.1831217</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(nnprob)</code></pre>
-<pre><code>##             p1        p2        p3         p4          p5
-## [1,] 0.2912386 0.5024724 0.1033502 0.07951533 0.023423424
-## [2,] 0.3372522 0.4574122 0.1238175 0.06011707 0.021401018
-## [3,] 0.2851380 0.4452661 0.1487303 0.08269638 0.038169149
-## [4,] 0.4842989 0.4610356 0.0331811 0.01646892 0.005015449
-## [5,] 0.3297829 0.4825054 0.1028856 0.06787000 0.016956119
-## [6,] 0.2452145 0.4224020 0.1988514 0.09276929 0.040762843</code></pre>
-<div id="arithmetic-average." class="section level3">
-<h3>Arithmetic average.</h3>
+<pre><code>##             p1        p2         p3         p4         p5
+## [1,] 0.4411817 0.3675164 0.11637893 0.06155106 0.01337189
+## [2,] 0.5236418 0.3140334 0.09220534 0.05377780 0.01634164
+## [3,] 0.4776893 0.3532408 0.08672251 0.06294419 0.01940314
+## [4,] 0.5924417 0.2759406 0.07112943 0.04818635 0.01230201
+## [5,] 0.5581730 0.2973105 0.08110554 0.04606775 0.01734312
+## [6,] 0.3047433 0.5045336 0.09234335 0.08236849 0.01601131</code></pre>
+<div id="arithmetic-average" class="section level3">
+<h3>Arithmetic average</h3>
 <p>Optimal weights were computed using the avg.arit function found in the appendix.</p>
 <pre class="sourceCode r"><code class="sourceCode r">arit &lt;-<span class="st"> </span>function(vec){
   pred &lt;-<span class="st"> </span><span class="kw">which.max</span>(vec[<span class="dv">1</span>:<span class="dv">5</span>]*(<span class="fl">0.76</span>) +<span class="st"> </span>vec[<span class="dv">6</span>:<span class="dv">10</span>]*(<span class="fl">0.24</span>))
@@ -441,10 +441,10 @@ nnprob &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(pred[,<sp
 combined &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgbprob,nnprob)
 finallabelsarit &lt;-<span class="st"> </span><span class="kw">apply</span>(combined,<span class="dv">1</span>,arit)
 <span class="kw">head</span>(finallabelsarit)</code></pre>
-<pre><code>## [1] 2 2 2 1 2 2</code></pre>
+<pre><code>## [1] 2 1 1 1 1 2</code></pre>
 </div>
-<div id="geometric-average." class="section level3">
-<h3>Geometric average.</h3>
+<div id="geometric-average" class="section level3">
+<h3>Geometric average</h3>
 <p>Optimal weights were computed using the avg.geom function found in the appendix.</p>
 <pre class="sourceCode r"><code class="sourceCode r">geom &lt;-<span class="st"> </span>function(vec){
   pred &lt;-<span class="st"> </span><span class="kw">which.max</span>(vec[<span class="dv">1</span>:<span class="dv">5</span>]^(<span class="fl">0.76</span>) *<span class="st"> </span>vec[<span class="dv">6</span>:<span class="dv">10</span>]^(<span class="fl">0.24</span>))
@@ -454,7 +454,7 @@ finallabelsarit &lt;-<span class="st"> </span><span class="kw">apply</span>(comb
 combined &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgbprob,nnprob)
 finallabelsgeom &lt;-<span class="st"> </span><span class="kw">apply</span>(combined,<span class="dv">1</span>,geom)
 <span class="kw">head</span>(finallabelsgeom)</code></pre>
-<pre><code>## [1] 2 2 2 1 1 2</code></pre>
+<pre><code>## [1] 2 1 1 1 1 2</code></pre>
 </div>
 <div id="creating-submission-files" class="section level3">
 <h3>Creating submission files</h3>
@@ -471,7 +471,7 @@ submissiongeom$popularity &lt;-<span class="st"> </span>finallabelsgeom
 <h2>6 Appendix</h2>
 <div id="optimising-xgboost" class="section level3">
 <h3>Optimising Xgboost</h3>
-<p>Below code is not executed for thid document as it takes some time to run. On the full train set it can easily run for more than 3 hours.</p>
+<p>Below code is not executed for this document as it takes some time to run. On the full train set it can easily run for more than 3 hours.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
 <span class="kw">library</span>(xgboost)
 <span class="kw">library</span>(readr)
@@ -518,82 +518,52 @@ xgb_train_1 =<span class="st"> </span><span class="kw">train</span>(
 <div id="arithmetic-and-geometric-averaging" class="section level3">
 <h3>Arithmetic and Geometric averaging</h3>
 <p>Arithmetic averaging</p>
-<pre class="sourceCode r"><code class="sourceCode r">avg.arit &lt;-<span class="st"> </span>function(mat1,mat2,<span class="dt">label=</span>train$popularity,<span class="dt">iter=</span><span class="dv">101</span>){
-  mat1 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mat1)
-  mat2 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mat2)
-  mat &lt;-<span class="st"> </span><span class="kw">cbind</span>(mat1,mat2)
-  result &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>,<span class="dt">nrow=</span>iter,<span class="dt">ncol=</span><span class="dv">3</span>)
-  f &lt;-<span class="st"> </span>function(vec){
-    pred &lt;-<span class="st"> </span><span class="kw">which.max</span>(w*vec[<span class="dv">1</span>:<span class="dv">5</span>]+(<span class="dv">1</span>-w)*vec[<span class="dv">6</span>:<span class="dv">10</span>])
-    <span class="kw">return</span>(pred)
-  }
-  for(i in <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">length.out=</span>iter)){
-    <span class="kw">print</span>(i)
-    w&lt;-i
-    pred &lt;-<span class="st"> </span><span class="kw">apply</span>(mat,<span class="dv">1</span>,f)
-    score &lt;-<span class="st"> </span><span class="kw">sum</span>(pred==label)/<span class="kw">length</span>(label)
-    result[<span class="dv">1</span>+i/(<span class="dv">1</span>/(iter<span class="dv">-1</span>)),] &lt;-<span class="st"> </span><span class="kw">c</span>(i,(<span class="dv">1</span>-i),score)
-  }
-  <span class="kw">return</span>(result[<span class="kw">order</span>(result[,<span class="dv">3</span>],<span class="dt">decreasing=</span><span class="ot">TRUE</span>),])
-}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">arithmeticaverage &lt;-<span class="st"> </span>DUN::<span class="kw">avg.arit</span>(xgmetatrain,rfmetatrain, <span class="dt">label =</span> train$popularity, <span class="dt">iter =</span> <span class="dv">11</span>)</code></pre>
+<pre><code>## [1] 0
+## [1] 0.1
+## [1] 0.2
+## [1] 0.3
+## [1] 0.4
+## [1] 0.5
+## [1] 0.6
+## [1] 0.7
+## [1] 0.8
+## [1] 0.9
+## [1] 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(arithmeticaverage)</code></pre>
+<pre><code>##      [,1] [,2]      [,3]
+## [1,]  0.2  0.8 0.4357832
+## [2,]  0.5  0.5 0.4357832
+## [3,]  0.4  0.6 0.4350408
+## [4,]  0.3  0.7 0.4342984
+## [5,]  0.0  1.0 0.4320713
+## [6,]  0.1  0.9 0.4320713</code></pre>
 <p>Geometric averaging</p>
-<pre class="sourceCode r"><code class="sourceCode r">avg.geom &lt;-<span class="st"> </span>function(mat1,mat2,<span class="dt">label=</span>train$popularity,<span class="dt">iter=</span><span class="dv">101</span>){
-  mat1 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mat1)
-  mat2 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mat2)
-  mat &lt;-<span class="st"> </span><span class="kw">cbind</span>(mat1,mat2)
-  result &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>,<span class="dt">nrow=</span>iter,<span class="dt">ncol=</span><span class="dv">3</span>)
-  f &lt;-<span class="st"> </span>function(vec){
-    pred &lt;-<span class="st"> </span><span class="kw">which.max</span>(vec[<span class="dv">1</span>:<span class="dv">5</span>]^(w) *<span class="st"> </span>vec[<span class="dv">6</span>:<span class="dv">10</span>]^(<span class="dv">1</span>-w))
-    <span class="kw">return</span>(pred)
-  }
-  for(i in <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">length.out=</span>iter)){
-    <span class="kw">print</span>(i)
-    w&lt;-i
-    pred &lt;-<span class="st"> </span><span class="kw">apply</span>(mat,<span class="dv">1</span>,f)
-    score &lt;-<span class="st"> </span><span class="kw">sum</span>(pred==label)/<span class="kw">length</span>(label)
-    result[<span class="dv">1</span>+i/(<span class="dv">1</span>/(iter<span class="dv">-1</span>)),] &lt;-<span class="st"> </span><span class="kw">c</span>(i,(<span class="dv">1</span>-i),score)
-  }
-  <span class="kw">return</span>(result[<span class="kw">order</span>(result[,<span class="dv">3</span>],<span class="dt">decreasing=</span><span class="ot">TRUE</span>),])
-}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">geometricaverage &lt;-<span class="st"> </span>DUN::<span class="kw">avg.geom</span>(xgmetatrain,rfmetatrain,<span class="dt">label =</span> train$popularity, <span class="dt">iter =</span> <span class="dv">11</span>)</code></pre>
+<pre><code>## [1] 0
+## [1] 0.1
+## [1] 0.2
+## [1] 0.3
+## [1] 0.4
+## [1] 0.5
+## [1] 0.6
+## [1] 0.7
+## [1] 0.8
+## [1] 0.9
+## [1] 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(geometricaverage)</code></pre>
+<pre><code>##      [,1] [,2]      [,3]
+## [1,]  0.4  0.6 0.4380104
+## [2,]  0.3  0.7 0.4365256
+## [3,]  0.2  0.8 0.4357832
+## [4,]  0.5  0.5 0.4335561
+## [5,]  0.0  1.0 0.4320713
+## [6,]  0.1  0.9 0.4320713</code></pre>
 </div>
 <div id="cross-validation-function-example" class="section level3">
 <h3>Cross validation function example</h3>
-<p>Below is the code and output of our Random forest 5-fold cross validation function.</p>
-<pre class="sourceCode r"><code class="sourceCode r">cv.rf &lt;-<span class="st"> </span>function(train,<span class="dt">tree=</span><span class="dv">400</span>){
-
-  base::<span class="kw">library</span>(randomForest)
-
-  c &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">colnames</span>(train)==<span class="st">&quot;popularity&quot;</span>)
-
-    base::<span class="kw">library</span>(caret)
-    <span class="kw">set.seed</span>(<span class="dv">1234</span>)
-    flds &lt;-<span class="st"> </span><span class="kw">createFolds</span>(train$popularity,<span class="dt">k=</span><span class="dv">5</span>)
-    rfpred &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>,<span class="dv">5</span>)
-
-    for(j in <span class="dv">1</span>:<span class="dv">5</span>){
-      ktest &lt;-<span class="st"> </span>train[flds[[j]],]
-      ktrain &lt;-<span class="st"> </span>train[-flds[[j]],]
-
-      <span class="kw">print</span>(<span class="st">&quot;fold&quot;</span>)
-      <span class="kw">print</span>(j) <span class="co"># tracing progress</span>
-      <span class="kw">print</span>(rfpred)
-      <span class="kw">set.seed</span>(<span class="dv">1234</span>)
-      rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(ktrain[,-c], <span class="kw">as.factor</span>(ktrain$popularity), <span class="dt">ntree=</span>tree,
-                         <span class="dt">importance=</span><span class="ot">TRUE</span>, <span class="dt">do.trace=</span><span class="ot">TRUE</span>)
-
-      predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(rf,ktest[,-c])
-      rfsum &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(predictions, ktest$popularity)
-      rfpred[j] &lt;-<span class="st"> </span>rfsum$overall[<span class="dv">1</span>]
-      <span class="kw">print</span>(rfsum)
-
-      } <span class="co"># end of looping cross validations</span>
-      avg &lt;-<span class="st"> </span><span class="kw">mean</span>(rfpred)
-
-      <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">vec=</span>rfpred,<span class="dt">avg=</span>avg))
-
-} <span class="co"># end of cv.rf</span>
-
-cv &lt;-<span class="st"> </span><span class="kw">cv.rf</span>(<span class="dt">train =</span> train, <span class="dt">tree =</span> <span class="dv">30</span>)</code></pre>
+<p>Below is the example of our Random forest 5-fold cross validation function.</p>
+<pre class="sourceCode r"><code class="sourceCode r">cv &lt;-<span class="st"> </span>DUN::<span class="kw">cv.rf</span>(<span class="dt">train =</span> train, <span class="dt">tree =</span> <span class="dv">30</span>)</code></pre>
 <pre><code>## [1] &quot;fold&quot;
 ## [1] 1
 ## [1] NA NA NA NA NA
