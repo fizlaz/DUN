@@ -82,10 +82,10 @@ test &lt;-<span class="st"> </span>test[,-<span class="kw">c</span>(<span class=
 <p>Transform target variable into a factor.</p>
 <pre class="sourceCode r"><code class="sourceCode r">trainfull$popularity &lt;-<span class="st"> </span><span class="kw">as.factor</span>(trainfull$popularity)</code></pre>
 <p>Label frequency of full train set:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(trainfull$popularity)/<span class="kw">nrow</span>(trainfull)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">table</span>(trainfull$popularity)/<span class="kw">nrow</span>(trainfull))</code></pre>
 <pre><code>## 
-##           1           2           3           4           5 
-## 0.315933333 0.458800000 0.190400000 0.033300000 0.001566667</code></pre>
+## 1 2 3 4 5 
+## 0 0 0 0 0</code></pre>
 <p>For the purpose of this vignette we will subsample 1347 rows from the trainset.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
 <pre><code>## 
@@ -104,10 +104,10 @@ a4 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="k
 a5 &lt;-<span class="st"> </span><span class="kw">sample_n</span>(<span class="kw">filter</span>(trainfull,popularity==<span class="dv">5</span>), <span class="dt">size=</span><span class="dv">47</span>)
 train &lt;-<span class="st"> </span><span class="kw">rbind</span>(a1,a2,a3,a4,a5)</code></pre>
 <p>For these examples we increase ratios for class label 4 and 5 in order to keep the set smaller and all of our models working.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(train$popularity)/<span class="kw">nrow</span>(train)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">table</span>(train$popularity)/<span class="kw">nrow</span>(train))</code></pre>
 <pre><code>## 
-##          1          2          3          4          5 
-## 0.29695620 0.44543430 0.14847810 0.07423905 0.03489235</code></pre>
+## 1 2 3 4 5 
+## 0 0 0 0 0</code></pre>
 </div>
 <div id="creating-metafeatures-for-layer-1" class="section level2">
 <h2>3 Creating metafeatures for layer 1</h2>
@@ -360,9 +360,9 @@ xgbprob &lt;-<span class="st"> </span><span class="kw">matrix</span>(preds,<span
 <pre><code>## Successfully connected to http://127.0.0.1:54321/ 
 ## 
 ## R is connected to the H2O cluster: 
-##     H2O cluster uptime:         1 days 15 hours 
+##     H2O cluster uptime:         6 hours 42 minutes 
 ##     H2O cluster version:        3.6.0.8 
-##     H2O cluster name:           H2O_started_from_R_fizlaz_lep468 
+##     H2O cluster name:           H2O_started_from_R_fizlaz_ete054 
 ##     H2O cluster total nodes:    1 
 ##     H2O cluster total memory:   1.71 GB 
 ##     H2O cluster total cores:    4 
@@ -399,7 +399,7 @@ model &lt;-<span class="st"> </span><span class="kw">h2o.deeplearning</span>(<sp
   |                                                                       
   |                                                                 |   0%
   |                                                                       
-  |=============                                                    |  20%
+  |======                                                           |  10%
   |                                                                       
   |=================================================================| 100%</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
@@ -423,13 +423,13 @@ nnprob &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(pred[,<sp
 ## [5,] 0.2579787 0.2309289 0.1725481 0.1687019 0.1698423
 ## [6,] 0.1777316 0.2476686 0.2114745 0.1800035 0.1831217</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(nnprob)</code></pre>
-<pre><code>##             p1        p2         p3         p4         p5
-## [1,] 0.4411817 0.3675164 0.11637893 0.06155106 0.01337189
-## [2,] 0.5236418 0.3140334 0.09220534 0.05377780 0.01634164
-## [3,] 0.4776893 0.3532408 0.08672251 0.06294419 0.01940314
-## [4,] 0.5924417 0.2759406 0.07112943 0.04818635 0.01230201
-## [5,] 0.5581730 0.2973105 0.08110554 0.04606775 0.01734312
-## [6,] 0.3047433 0.5045336 0.09234335 0.08236849 0.01601131</code></pre>
+<pre><code>##             p1        p2        p3         p4          p5
+## [1,] 0.2798370 0.5202456 0.1326309 0.05261558 0.014671025
+## [2,] 0.3963710 0.4530530 0.1132324 0.02892675 0.008416854
+## [3,] 0.3102111 0.4291267 0.1715833 0.06453166 0.024547263
+## [4,] 0.5223214 0.3421381 0.1069968 0.02234457 0.006199176
+## [5,] 0.3602626 0.4624441 0.1314753 0.03687223 0.008945751
+## [6,] 0.2358269 0.4588042 0.2044729 0.07600203 0.024893918</code></pre>
 <div id="arithmetic-average" class="section level3">
 <h3>Arithmetic average</h3>
 <p>Optimal weights were computed using the avg.arit function found in the appendix.</p>
@@ -441,7 +441,7 @@ nnprob &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(pred[,<sp
 combined &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgbprob,nnprob)
 finallabelsarit &lt;-<span class="st"> </span><span class="kw">apply</span>(combined,<span class="dv">1</span>,arit)
 <span class="kw">head</span>(finallabelsarit)</code></pre>
-<pre><code>## [1] 2 1 1 1 1 2</code></pre>
+<pre><code>## [1] 2 2 2 1 2 2</code></pre>
 </div>
 <div id="geometric-average" class="section level3">
 <h3>Geometric average</h3>
@@ -454,7 +454,7 @@ finallabelsarit &lt;-<span class="st"> </span><span class="kw">apply</span>(comb
 combined &lt;-<span class="st"> </span><span class="kw">cbind</span>(xgbprob,nnprob)
 finallabelsgeom &lt;-<span class="st"> </span><span class="kw">apply</span>(combined,<span class="dv">1</span>,geom)
 <span class="kw">head</span>(finallabelsgeom)</code></pre>
-<pre><code>## [1] 2 1 1 1 1 2</code></pre>
+<pre><code>## [1] 2 2 2 1 1 2</code></pre>
 </div>
 <div id="creating-submission-files" class="section level3">
 <h3>Creating submission files</h3>
@@ -530,14 +530,19 @@ xgb_train_1 =<span class="st"> </span><span class="kw">train</span>(
 ## [1] 0.8
 ## [1] 0.9
 ## [1] 1</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(arithmeticaverage)</code></pre>
-<pre><code>##      [,1] [,2]      [,3]
-## [1,]  0.2  0.8 0.4357832
-## [2,]  0.5  0.5 0.4357832
-## [3,]  0.4  0.6 0.4350408
-## [4,]  0.3  0.7 0.4342984
-## [5,]  0.0  1.0 0.4320713
-## [6,]  0.1  0.9 0.4320713</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">arithmeticaverage</code></pre>
+<pre><code>##       [,1] [,2]      [,3]
+##  [1,]  0.2  0.8 0.4357832
+##  [2,]  0.5  0.5 0.4357832
+##  [3,]  0.4  0.6 0.4350408
+##  [4,]  0.3  0.7 0.4342984
+##  [5,]  0.0  1.0 0.4320713
+##  [6,]  0.1  0.9 0.4320713
+##  [7,]  0.6  0.4 0.4305865
+##  [8,]  0.7  0.3 0.3845583
+##  [9,]  0.8  0.2 0.3221975
+## [10,]  0.9  0.1 0.2613215
+## [11,]  1.0  0.0 0.2078693</code></pre>
 <p>Geometric averaging</p>
 <pre class="sourceCode r"><code class="sourceCode r">geometricaverage &lt;-<span class="st"> </span>DUN::<span class="kw">avg.geom</span>(xgmetatrain,rfmetatrain,<span class="dt">label =</span> train$popularity, <span class="dt">iter =</span> <span class="dv">11</span>)</code></pre>
 <pre><code>## [1] 0
@@ -551,14 +556,19 @@ xgb_train_1 =<span class="st"> </span><span class="kw">train</span>(
 ## [1] 0.8
 ## [1] 0.9
 ## [1] 1</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(geometricaverage)</code></pre>
-<pre><code>##      [,1] [,2]      [,3]
-## [1,]  0.4  0.6 0.4380104
-## [2,]  0.3  0.7 0.4365256
-## [3,]  0.2  0.8 0.4357832
-## [4,]  0.5  0.5 0.4335561
-## [5,]  0.0  1.0 0.4320713
-## [6,]  0.1  0.9 0.4320713</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">geometricaverage</code></pre>
+<pre><code>##       [,1] [,2]      [,3]
+##  [1,]  0.4  0.6 0.4380104
+##  [2,]  0.3  0.7 0.4365256
+##  [3,]  0.2  0.8 0.4357832
+##  [4,]  0.5  0.5 0.4335561
+##  [5,]  0.0  1.0 0.4320713
+##  [6,]  0.1  0.9 0.4320713
+##  [7,]  0.6  0.4 0.4105419
+##  [8,]  0.7  0.3 0.3704529
+##  [9,]  0.8  0.2 0.3125464
+## [10,]  0.9  0.1 0.2724573
+## [11,]  1.0  0.0 0.2078693</code></pre>
 </div>
 <div id="cross-validation-function-example" class="section level3">
 <h3>Cross validation function example</h3>
