@@ -1,7 +1,7 @@
 ---
 title: "Vignette - Team DUN"
 author: "Dom, Uwe, Niti"
-date: "March 18, 2016"
+date: "March 2016"
 output: rmarkdown::pdf_document
 vignette: >
   %\VignetteIndexEntry{DUN Vignette}
@@ -90,7 +90,7 @@ rfmetatest <- rfmetatest[,1:5]
 ```
 
 ### Xgboost layer 1
-Now create meta features with Xgboost. These are created on the same five folds. Xgboost parameters were optimised using caret package grid search. Please refer to the vignette appendix.
+Now create meta features with Xgboost. These are created on the same five folds. Xgboost parameters were optimised using caret package grid search. Please refer to the vignette appendix. Use default number of rounds with full train set.
 ```{r, message=FALSE}
 xgmetatrain <- DUN::fmeta.xgb(train,nrounds = 30, verbose = 0)
 xgmetatest <- DUN::fmeta.xgb(train, test = test, nrounds = 30, verbose = 0)
@@ -103,7 +103,7 @@ head(xgmetatest)
 ```
 
 ### maboost(AdaBoost) layer 1
-Next create metafeatures on same folds with AdaBoost. We use maboost package which enables multiclass AdaBoost.
+Next create metafeatures on same folds with AdaBoost. We use maboost package which enables multiclass AdaBoost. Use default number of rounds with full train set.
 ```{r, message=FALSE}
 mabmetatrain <- DUN::fmeta.mab(train,rounds = 30)
 mabmetatest <- DUN::fmeta.mab(train,test = test, rounds = 30)
@@ -186,10 +186,10 @@ model <- h2o.deeplearning(x = x,
                           #validation_frame = data_test_h,
                           distribution = "multinomial",
                           activation = "RectifierWithDropout",
-                          hidden = c(20,20),
+                          hidden = c(20,20), #c(200,200,200) with full set
                           input_dropout_ratio = 0.2,
                           l1 = 1e-7,
-                          epochs = 10)
+                          epochs = 10) #20 with full set
 
 #
 pred <- h2o.predict(model, newdata = data_test_h)
